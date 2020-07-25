@@ -14,6 +14,8 @@ let scale = {
   y: 1,
 };
 
+const backgroundImage = love.graphics.newImage("res/images/background.png");
+
 love.load = args =>
 {
   const version = love.getVersion();
@@ -70,6 +72,8 @@ love.draw = () =>
 {
   love.graphics.scale(scale.x, scale.y);
   love.graphics.setColor(1, 1, 1, 1);
+  
+  love.graphics.draw(backgroundImage);
   
   love.graphics.draw(
     spriteSheet.texture,
