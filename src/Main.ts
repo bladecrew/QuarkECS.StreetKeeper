@@ -45,10 +45,10 @@ love.load = args =>
     "idle",
     new Animation(
       [
-        spriteSheet.getFrame(1, 5),
-        spriteSheet.getFrame(1, 4),
-        spriteSheet.getFrame(1, 5),
-        spriteSheet.getFrame(1, 6),
+        spriteSheet.frame(1, 5),
+        spriteSheet.frame(1, 4),
+        spriteSheet.frame(1, 5),
+        spriteSheet.frame(1, 6),
       ],
       6,
       true
