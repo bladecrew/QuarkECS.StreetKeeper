@@ -1,48 +1,58 @@
-export class Animation {
-  private elasped = 0;
-  private frameTime = 0;
-  private isPlaying = false;
-  private currentFrame = 1;
-
-  constructor(private quads: Quad[], fps: number, private loop = false) {
-    this.frameTime = 1 / fps;
+export class Animation
+{
+  private readonly _frameTime: number = 0;
+  private _elapsed = 0;
+  private _isPlaying = false;
+  private _currentFrame = 1;
+  
+  constructor(private _quads: Quad[], fps: number, private _isLoop = false)
+  {
+    this._frameTime = 1 / fps;
   }
-
-  public update(dt: number) {
-    if (this.frameTime > 0 && this.isPlaying) {
-      this.elasped += dt;
-
-      if (this.elasped >= this.frameTime) {
-        this.elasped = 0;
-        this.currentFrame += 1;
-
-        if (this.currentFrame >= this.quads.length) {
-          if (this.loop) {
-            this.currentFrame = 0;
-          } else {
-            this.currentFrame = this.quads.length - 1;
-            this.stop();
-          }
-        }
-      }
-    }
+  
+  public update(dt: number)
+  {
+    if (this._frameTime <= 0 || !this._isPlaying)
+      return;
+    
+    this._elapsed += dt;
+    
+    if (this._elapsed < this._frameTime)
+      return;
+    
+    this._elapsed = 0;
+    this._currentFrame += 1;
+    
+    if (this._currentFrame < this._quads.length)
+      return;
+    
+    this._currentFrame = !this._isLoop 
+      ? this._quads.length - 1 
+      : 0;
+    
+    if (!this._isLoop)
+      this.stop();
   }
-
-  public getCurrentFrame(): Quad {
-    return this.quads[this.currentFrame];
+  
+  public currentFrame(): Quad
+  {
+    return this._quads[this._currentFrame];
   }
-
-  public play() {
-    this.isPlaying = true;
+  
+  public play()
+  {
+    this._isPlaying = true;
   }
-
-  public stop() {
-    this.isPlaying = false;
+  
+  public stop()
+  {
+    this._isPlaying = false;
   }
-
-  public restart() {
-    this.isPlaying = true;
-    this.currentFrame = 0;
-    this.elasped = 0;
+  
+  public restart()
+  {
+    this._isPlaying = true;
+    this._currentFrame = 0;
+    this._elapsed = 0;
   }
 }

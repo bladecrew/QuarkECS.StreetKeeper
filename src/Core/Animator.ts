@@ -1,44 +1,53 @@
-import { Animation } from "./Animation";
+import {Animation} from "./Animation";
 
-export class Animator {
+export class Animator
+{
   private animations: { [key: string]: Animation } = {};
-  private currentAnimation: Animation | null = null;
-
-  constructor() {}
-
-  public addAnimation(name: string, animation: Animation) {
+  private _currentAnimation: Animation | null = null;
+  
+  public addAnimation(name: string, animation: Animation): void
+  {
     this.animations[name] = animation;
   }
-
-  public removeAnimation(name: string) {
+  
+  public removeAnimation(name: string): void
+  {
     delete this.animations[name];
   }
-
-  public getCurrentAnimation() {
-    return this.currentAnimation;
+  
+  public currentAnimation(): Animation | null
+  {
+    return this._currentAnimation;
   }
-
-  public play(name: string) {
-    if (this.animations[name] == null) {
+  
+  public play(name: string): void
+  {
+    if (this.animations[name] == null)
+    {
       error(`animation '${name}' not found`);
-    } else {
-      this.currentAnimation = this.animations[name];
-      this.currentAnimation.play();
+    } else
+    {
+      this._currentAnimation = this.animations[name];
+      this._currentAnimation.play();
     }
   }
-
-  public stop() {
-    if (this.currentAnimation == null) {
+  
+  public stop(): void
+  {
+    if (this._currentAnimation == null)
+    {
       return;
     }
-
-    this.currentAnimation.stop();
-    this.currentAnimation = null;
+    
+    this._currentAnimation.stop();
+    this._currentAnimation = null;
   }
-
-  public update(dt: number) {
-    if (this.currentAnimation != null) {
-      this.currentAnimation.update(dt);
+  
+  public update(dt: number): void
+  {
+    if (this._currentAnimation != null)
+    {
+      this._currentAnimation.update(dt);
     }
   }
 }

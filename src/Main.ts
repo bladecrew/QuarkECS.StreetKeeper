@@ -34,7 +34,7 @@ love.load = args =>
   love.graphics.setDefaultFilter("nearest", "nearest");
   
   scale.x = love.graphics.getWidth() / GAME_WIDTH;
-  scale.y = love.graphics.getHeight() / GAME_HEIGHT;
+  scale.y = love.graphics.getHeight() / GAME_HEIGHT; 
   
   const [content, error] = love.filesystem.read("res/logs.txt");
   
@@ -77,7 +77,7 @@ love.draw = () =>
   
   love.graphics.draw(
     spriteSheet.texture,
-    animator.getCurrentAnimation()!.getCurrentFrame(),
+    animator.currentAnimation()!.currentFrame(),
     228,
     100
   );
