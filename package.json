@@ -5,6 +5,7 @@
   "scripts": {
     "start": "love game --console",
     "build": "yarn build:tstl && yarn build:copy",
+    "build+start": "yarn build && yarn start",
     "build:tstl": "tstl -p tsconfig.json",
     "build:copy": "copyfiles res/**/* game",
     "build:watch": "tstl -w -p tsconfig.json",
