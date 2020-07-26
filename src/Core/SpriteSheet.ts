@@ -2,21 +2,11 @@ export class SpriteSheet
 {
   private readonly quads: Quad[][] = [];
   
-  constructor(public readonly texture: Texture, frameWidth: number, frameHeight: number)
+  constructor(public readonly texture: Texture, rows: number, cols: number)
   {
     const [width, height] = texture.getDimensions();
-    const rows = height / frameHeight;
-    const cols = width / frameWidth;
-    
-    if (Math.floor(cols) !== cols)
-    {
-      error("frame width must divide evenly into texture width");
-    }
-    
-    if (Math.floor(rows) !== rows)
-    {
-      error("frame height must divide evenly into texture height");
-    }
+    const quadWidth = width / cols;
+    const quadHeight = height / rows;
     
     for (let row = 0; row < rows; ++row)
     {
@@ -25,11 +15,12 @@ export class SpriteSheet
       for (let col = 0; col < cols; ++col)
       {
         this.quads[row][col] = love.graphics.newQuad(
-          (col - 1) * frameWidth,
-          (row - 1) * frameHeight,
-          frameWidth,
-          frameHeight,
-          ...texture.getDimensions()
+          (col - 1) * quadWidth,
+          (row - 1) * quadHeight,
+          quadWidth,
+          quadHeight,
+          width,
+          height
         );
       }
     }
@@ -38,9 +29,7 @@ export class SpriteSheet
   public frame(row: number, col: number): Quad
   {
     if (this.quads[row][col] == null)
-    {
       error(`frame at row(${row}) and col(${col}) not found`);
-    }
     
     return this.quads[row][col];
   }

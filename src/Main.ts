@@ -38,17 +38,24 @@ love.load = args =>
   
   const [content, error] = love.filesystem.read("res/logs.txt");
   
-  const playerImage = love.graphics.newImage("res/images/megaman.png");
-  spriteSheet = new SpriteSheet(playerImage, 32, 32);
+  const playerImage = love.graphics.newImage("res/images/idle.png");
+  spriteSheet = new SpriteSheet(playerImage, 7, 7);
   
   animator.addAnimation(
     "idle",
     new Animation(
       [
-        spriteSheet.frame(1, 5),
+        spriteSheet.frame(1, 1),
+        spriteSheet.frame(1, 2),
+        spriteSheet.frame(1, 3),
         spriteSheet.frame(1, 4),
         spriteSheet.frame(1, 5),
         spriteSheet.frame(1, 6),
+        spriteSheet.frame(1, 5),
+        spriteSheet.frame(1, 4),
+        spriteSheet.frame(1, 3),
+        spriteSheet.frame(1, 2),
+        spriteSheet.frame(1, 1)
       ],
       6,
       true
@@ -61,9 +68,7 @@ love.load = args =>
 love.update = dt =>
 {
   if (love.keyboard.isDown("escape"))
-  {
     love.event.quit();
-  }
   
   animator.update(dt);
 };
@@ -78,7 +83,7 @@ love.draw = () =>
   love.graphics.draw(
     spriteSheet.texture,
     animator.currentAnimation()!.currentFrame(),
-    228,
-    100
+    114,
+    190
   );
 };
