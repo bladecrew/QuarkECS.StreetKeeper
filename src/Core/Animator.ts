@@ -25,7 +25,8 @@ export class Animator
     if (this.animations[name] == null)
     {
       error(`animation '${name}' not found`);
-    } else
+    }
+    else
     {
       this._currentAnimation = this.animations[name];
       this._currentAnimation.play();

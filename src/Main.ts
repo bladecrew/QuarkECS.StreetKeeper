@@ -34,7 +34,7 @@ love.load = args =>
   love.graphics.setDefaultFilter("nearest", "nearest");
   
   scale.x = love.graphics.getWidth() / GAME_WIDTH;
-  scale.y = love.graphics.getHeight() / GAME_HEIGHT; 
+  scale.y = love.graphics.getHeight() / GAME_HEIGHT;
   
   const [content, error] = love.filesystem.read("res/logs.txt");
   

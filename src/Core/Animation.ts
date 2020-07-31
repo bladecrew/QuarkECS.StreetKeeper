@@ -26,8 +26,8 @@ export class Animation
     if (this._currentFrame < this._quads.length)
       return;
     
-    this._currentFrame = !this._isLoop 
-      ? this._quads.length - 1 
+    this._currentFrame = !this._isLoop
+      ? this._quads.length - 1
       : 0;
     
     if (!this._isLoop)
