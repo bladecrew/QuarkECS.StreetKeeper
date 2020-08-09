@@ -1,6 +1,7 @@
 import {Animator} from "./Core/Framework/Animator";
 import {SpriteSheet} from "./Core/Framework/SpriteSheet";
 import {Animation} from "./Core/Framework/Animation";
+import {Player} from "./Scripts/Player";
 
 let spriteSheet: SpriteSheet;
 
@@ -15,6 +16,8 @@ let scale = {
 };
 
 const backgroundImage = love.graphics.newImage("res/images/background.png");
+
+let player: Player;
 
 love.load = args =>
 {
@@ -63,6 +66,8 @@ love.load = args =>
   );
   
   animator.play("idle");
+  
+  player = new Player(spriteSheet, animator);
 };
 
 love.update = dt =>
@@ -70,7 +75,7 @@ love.update = dt =>
   if (love.keyboard.isDown("escape"))
     love.event.quit();
   
-  animator.update(dt);
+  player.update(dt);
 };
 
 love.draw = () =>
@@ -80,10 +85,12 @@ love.draw = () =>
   
   love.graphics.draw(backgroundImage);
   
+  let playerDrawObject = player.drawObject();
+  
   love.graphics.draw(
-    spriteSheet.texture,
-    animator.currentAnimation()!.currentFrame(),
-    114,
-    190
-  );
+    playerDrawObject.texture,
+    playerDrawObject.quad,
+    playerDrawObject.position.x,
+    playerDrawObject.position.y
+  )
 };
