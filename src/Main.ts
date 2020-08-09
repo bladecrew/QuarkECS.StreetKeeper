@@ -1,6 +1,6 @@
-import {Animator} from "./Core/Animator";
-import {SpriteSheet} from "./Core/SpriteSheet";
-import {Animation} from "./Core/Animation";
+import {Animator} from "./Core/Framework/Animator";
+import {SpriteSheet} from "./Core/Framework/SpriteSheet";
+import {Animation} from "./Core/Framework/Animation";
 
 let spriteSheet: SpriteSheet;
 

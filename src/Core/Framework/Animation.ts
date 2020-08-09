@@ -1,6 +1,7 @@
 export class Animation
 {
   private readonly _frameTime: number = 0;
+  
   private _elapsed = 0;
   private _isPlaying = false;
   private _currentFrame = 1;
