@@ -1,5 +1,4 @@
 import {Position} from "./Position";
-import {DrawObject} from "./DrawObject";
 import {SpriteSheet} from "../Framework/SpriteSheet";
 import {Animator} from "../Framework/Animator";
 
@@ -21,5 +20,13 @@ export abstract class GameObject
     this.animator.update(deltaTime);
   }
   
-  public abstract drawObject(): DrawObject;
+  public draw(): void
+  {
+    love.graphics.draw(
+      this.sheet.texture,
+      this.animator.currentAnimation()!.currentFrame(),
+      this.position.x,
+      this.position.y
+    );
+  }
 }

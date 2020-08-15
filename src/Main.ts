@@ -85,12 +85,5 @@ love.draw = () =>
   
   love.graphics.draw(backgroundImage);
   
-  let playerDrawObject = player.drawObject();
-  
-  love.graphics.draw(
-    playerDrawObject.texture,
-    playerDrawObject.quad,
-    playerDrawObject.position.x,
-    playerDrawObject.position.y
-  )
+  player.draw();
 };
