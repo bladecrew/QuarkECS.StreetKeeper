@@ -4,6 +4,14 @@ import {Animator} from "../Framework/Animator";
 
 export abstract class GameObject
 {
+  public readonly draw = (): void =>
+    love.graphics.draw(
+      this.sheet.texture,
+      this.animator.currentAnimation()!.currentFrame(),
+      this.position.x,
+      this.position.y
+    );
+  
   protected readonly position: Position = new Position(0, 0);
   
   protected constructor
@@ -12,21 +20,17 @@ export abstract class GameObject
     protected readonly animator: Animator
   )
   {
-    this.position = new Position(0, 0);
   }
   
   public update(deltaTime: number): void
   {
     this.animator.update(deltaTime);
+    this.onUpdate();
   }
   
-  public draw(): void
-  {
-    love.graphics.draw(
-      this.sheet.texture,
-      this.animator.currentAnimation()!.currentFrame(),
-      this.position.x,
-      this.position.y
-    );
-  }
+  //region Api
+  
+  protected onUpdate(): void {}
+  
+  //endregion
 }
