@@ -19,7 +19,7 @@ const backgroundImage = love.graphics.newImage("res/images/background.png");
 
 let player: Player;
 
-love.load = args =>
+love.load = () =>
 {
   const version = love.getVersion();
   print(
@@ -38,8 +38,6 @@ love.load = args =>
   
   scale.x = love.graphics.getWidth() / GAME_WIDTH;
   scale.y = love.graphics.getHeight() / GAME_HEIGHT;
-  
-  const [content, error] = love.filesystem.read("res/logs.txt");
   
   const playerImage = love.graphics.newImage("res/images/idle.png");
   spriteSheet = new SpriteSheet(playerImage, 7, 7);

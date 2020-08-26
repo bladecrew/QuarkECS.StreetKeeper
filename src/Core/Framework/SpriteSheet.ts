@@ -25,7 +25,6 @@ export class SpriteSheet
       }
     }
   }
-  
   public frame(row: number, col: number): Quad
   {
     if (this._quads[row][col] == null)
