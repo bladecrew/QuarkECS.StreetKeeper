@@ -4,14 +4,6 @@ import {IController} from "./IController";
 
 export abstract class GameObject
 {
-  public readonly draw = (): void =>
-    love.graphics.draw(
-      this.sheet.texture,
-      this.animator.currentAnimation()!.currentFrame(),
-      this.position.x,
-      this.position.y
-    );
-  
   protected readonly position = {x: 0, y: 0};
   protected readonly controllers: IController[] = [];
   
@@ -21,6 +13,16 @@ export abstract class GameObject
     protected readonly animator: Animator
   )
   {
+  }
+  
+  public draw(): void
+  {
+    love.graphics.draw(
+      this.sheet.texture,
+      this.animator.currentAnimation()!.currentFrame(),
+      this.position.x,
+      this.position.y
+    );
   }
   
   public update(deltaTime: number): void
