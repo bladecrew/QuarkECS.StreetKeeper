@@ -2,7 +2,7 @@ export class GameConsole
 {
   private static _logsByKey: Map<string, any> = new Map<string, any>();
   
-  public static drawValue(key: string, value: any): void
+  public static setValue(key: string, value: any): void
   {
     this._logsByKey.set(key, value);
   }

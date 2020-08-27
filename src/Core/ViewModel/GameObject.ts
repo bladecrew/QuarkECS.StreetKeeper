@@ -1,5 +1,6 @@
 import {SpriteSheet} from "../View/SpriteSheet";
 import {Animator} from "../View/Animator";
+import {IController} from "./IController";
 
 export abstract class GameObject
 {
@@ -11,7 +12,8 @@ export abstract class GameObject
       this.position.y
     );
   
-  protected readonly position = { x: 0, y: 0 };
+  protected readonly position = {x: 0, y: 0};
+  protected readonly controllers: IController[] = [];
   
   protected constructor
   (
@@ -24,7 +26,13 @@ export abstract class GameObject
   public update(deltaTime: number): void
   {
     this.animator.update(deltaTime);
+    this.controllers.forEach(c => c.update(deltaTime, this.position, this.sheet, this.animator));
     this.onUpdate(deltaTime);
+  }
+  
+  public addController(controller: IController): void
+  {
+    this.controllers.push(controller);
   }
   
   //region Api

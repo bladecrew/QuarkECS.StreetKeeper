@@ -1,5 +1,6 @@
 import {Player} from "./Scripts/Player";
 import {GameConsole} from "./Core/Tools/GameConsole";
+import {PlayerMovementController} from "./Scripts/PlayerMovementController";
 
 const GAME_WIDTH = 512;
 const GAME_HEIGHT = 288;
@@ -35,6 +36,7 @@ love.load = () =>
   scale.y = love.graphics.getHeight() / GAME_HEIGHT;
   
   player = new Player();
+  player.addController(new PlayerMovementController());
 };
 
 love.update = dt =>
