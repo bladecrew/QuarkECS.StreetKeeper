@@ -5,14 +5,18 @@ export class Animator
   private _animations: { [key: string]: Animation } = {};
   private _currentAnimation: Animation | null = null;
   
-  public addAnimation(name: string, animation: Animation): void
+  public addAnimation(name: string, animation: Animation): Animator
   {
     this._animations[name] = animation;
+    
+    return this;
   }
   
-  public removeAnimation(name: string): void
+  public removeAnimation(name: string): Animator
   {
     delete this._animations[name];
+    
+    return this;
   }
   
   public currentAnimation(): Animation | null

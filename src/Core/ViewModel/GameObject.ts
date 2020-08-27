@@ -1,6 +1,6 @@
 import {Position} from "./Position";
-import {SpriteSheet} from "../Framework/SpriteSheet";
-import {Animator} from "../Framework/Animator";
+import {SpriteSheet} from "../View/SpriteSheet";
+import {Animator} from "../View/Animator";
 
 export abstract class GameObject
 {
