@@ -1,4 +1,3 @@
-import {Position} from "./Position";
 import {SpriteSheet} from "../View/SpriteSheet";
 import {Animator} from "../View/Animator";
 
@@ -12,7 +11,7 @@ export abstract class GameObject
       this.position.y
     );
   
-  protected readonly position: Position = new Position(0, 0);
+  protected readonly position = { x: 0, y: 0 };
   
   protected constructor
   (
@@ -25,12 +24,12 @@ export abstract class GameObject
   public update(deltaTime: number): void
   {
     this.animator.update(deltaTime);
-    this.onUpdate();
+    this.onUpdate(deltaTime);
   }
   
   //region Api
   
-  protected onUpdate(): void {}
+  protected onUpdate(dt: number): void {}
   
   //endregion
 }

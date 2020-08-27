@@ -1,9 +1,5 @@
-import {Animator} from "./Core/View/Animator";
-import {SpriteSheet} from "./Core/View/SpriteSheet";
-import {Animation} from "./Core/View/Animation";
 import {Player} from "./Scripts/Player";
-
-let spriteSheet: SpriteSheet;
+import {GameConsole} from "./Core/Tools/GameConsole";
 
 const GAME_WIDTH = 512;
 const GAME_HEIGHT = 288;
@@ -57,4 +53,5 @@ love.draw = () =>
   love.graphics.draw(backgroundImage);
   
   player.draw();
+  GameConsole.draw();
 };
