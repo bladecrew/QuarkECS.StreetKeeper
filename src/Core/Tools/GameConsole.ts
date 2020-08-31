@@ -14,6 +14,7 @@ export class GameConsole
       (value, key) => log += key + " " + value.toString() + "\n"
     );
     
+    love.graphics.setNewFont(10);
     love.graphics.setColor(255, 255, 255, 255);
     love.graphics.print(log, 10, 10);
   }
