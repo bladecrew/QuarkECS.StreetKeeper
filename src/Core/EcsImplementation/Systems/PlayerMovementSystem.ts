@@ -1,6 +1,6 @@
-import {Filter, ISystem} from "../../EcsDraft/Container";
+import {Filter, IUpdateSystem} from "../../EcsDraft/Container";
 
-export class PlayerMovementSystem implements ISystem
+export class PlayerMovementSystem implements IUpdateSystem
 {
   update(): void
   {

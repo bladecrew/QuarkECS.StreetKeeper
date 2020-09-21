@@ -4,7 +4,10 @@ import {Animator} from "../../View/Animator";
 
 export class DrawComponent implements IComponent
 {
-  public image: Image;
-  public spriteSheet: SpriteSheet;
-  public animator: Animator;
+  constructor(
+    public readonly image: Image,
+    public readonly spriteSheet: SpriteSheet,
+    public readonly animator: Animator
+  )
+  {}
 }

@@ -1,42 +1,63 @@
 export class EcsContainer
 {
-  private static readonly _entities: Entity[] = [];
-  private static readonly _systems: ISystem[] = [];
+  public static instance: EcsContainer;
   
-  constructor() {}
+  private readonly _entities: Entity[] = [];
+  private readonly _updateSystems: IUpdateSystem[] = [];
+  private readonly _initSystems: IInitSystem[] = [];
   
-  public static update(dt: number): void
+  constructor()
   {
-    this._systems.forEach(x => x.update());
   }
   
-  public static addSystem(system: ISystem): void
+  public initialize(): void
   {
-    this._systems.push(system);
-  }
-  
-  public static removeSystem<T extends ISystem>(): void
-  {
-    let system = this._systems.find(x => (x as T) != null);
-    if (system == null)
-      return;
+    EcsContainer.instance = this;
     
-    let index = this._systems.indexOf(system);
-    this._systems.slice(index, 1);
+    this._initSystems.forEach(x => x.init());
   }
   
-  public static addEntity(entity: Entity): void
+  public update(dt: number): void
+  {
+    this._updateSystems.forEach(x => x.update());
+  }
+  
+  public addSystem(system: IUpdateSystem | IInitSystem): void
+  {
+    if ("update" in system)
+      this._updateSystems.push(system);
+    else
+      this._initSystems.push(system);
+  }
+  
+  public removeSystem<T extends IUpdateSystem | IInitSystem>(): void
+  {
+    let updateSystem = this._updateSystems.find(x => (x as T) != null);
+    let initSystem = this._initSystems.find(x => (x as T) != null);
+    if (updateSystem != null)
+    {
+      let index = this._updateSystems.indexOf(updateSystem);
+      this._updateSystems.slice(index, 1);
+    }
+    else if (initSystem != null)
+    {
+      let index = this._initSystems.indexOf(initSystem);
+      this._initSystems.slice(index, 1);
+    }
+  }
+  
+  public addEntity(entity: Entity): void
   {
     this._entities.push(entity);
   }
   
-  public static removeEntity(entity: Entity)
+  public removeEntity(entity: Entity)
   {
     let index = this._entities.indexOf(entity);
     this._entities.splice(index, 1);
   }
   
-  public static entities<T extends IComponent>(): Entity[]
+  public entities<T extends IComponent>(): Entity[]
   {
     let entities: Entity[] = [];
     this._entities.forEach(x =>
@@ -79,9 +100,9 @@ export class Entity
   public component<T extends IComponent>(): T | undefined
   {
     let $component = this._components.find(x => (x as T) != null);
-    if($component == null)
+    if ($component == null)
       return undefined;
-      
+    
     return $component as T;
   }
 }
@@ -90,9 +111,14 @@ export interface IComponent
 {
 }
 
-export interface ISystem
+export interface IUpdateSystem
 {
   update(): void;
+}
+
+export interface IInitSystem
+{
+  init(): void;
 }
 
 export class Filter<T extends IComponent>
@@ -101,6 +127,6 @@ export class Filter<T extends IComponent>
   
   public entities(): Entity[]
   {
-    return EcsContainer.entities<T>();
+    return EcsContainer.instance.entities<T>();
   }
 }  

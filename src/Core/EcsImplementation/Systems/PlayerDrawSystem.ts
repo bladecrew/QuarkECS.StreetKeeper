@@ -1,7 +1,7 @@
-import {Filter, ISystem} from "../../EcsDraft/Container";
+import {Filter, IUpdateSystem} from "../../EcsDraft/Container";
 import {DrawComponent} from "../Components/DrawComponent";
 
-export class PlayerDrawSystem implements ISystem
+export class PlayerDrawSystem implements IUpdateSystem
 {
   private _filter: Filter<DrawComponent> = new Filter<DrawComponent>();
   
