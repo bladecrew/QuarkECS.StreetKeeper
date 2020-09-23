@@ -27,30 +27,17 @@ export class EcsEngine
       this._initSystems.push(system);
   }
   
-  public removeSystem<T extends IUpdateSystem | IInitSystem>(): void
-  {
-    let updateSystem = this._updateSystems.find(x => (x as T) != null);
-    let initSystem = this._initSystems.find(x => (x as T) != null);
-    if (updateSystem != null)
-    {
-      let index = this._updateSystems.indexOf(updateSystem);
-      this._updateSystems.slice(index, 1);
-    }
-    else if (initSystem != null)
-    {
-      let index = this._initSystems.indexOf(initSystem);
-      this._initSystems.slice(index, 1);
-    }
-  }
-  
   public addEntity(entity: Entity): void
   {
     this._entities.push(entity);
   }
   
-  public removeEntity(entity: Entity)
+  public removeEntity(entity: Entity): void
   {
     let index = this._entities.indexOf(entity);
+    if(index < 0)
+      return;
+    
     this._entities.splice(index, 1);
   }
   
