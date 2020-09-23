@@ -1,12 +1,12 @@
-import {Query, IUpdateSystem, EcsContainer} from "../../EcsDraft/Container";
+import {Query, IUpdateSystem, EcsEngine} from "../../EcsDraft/Ecs";
 import {DrawComponent} from "../Components/DrawComponent";
 import {PositionComponent} from "../Components/PositionComponent";
 
 export class DrawSystem implements IUpdateSystem
 {
-  update(container: EcsContainer): void
+  update(engine: EcsEngine): void
   {
-    Query.byContainer(container).get(DrawComponent, PositionComponent).forEach(
+    Query.byEngine(engine).get(DrawComponent, PositionComponent).forEach(
       ([entity, drawComponent, positionComponent]) =>
       {
         love.graphics.draw(

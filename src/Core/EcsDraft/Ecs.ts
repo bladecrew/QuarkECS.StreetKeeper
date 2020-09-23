@@ -1,4 +1,4 @@
-export class EcsContainer
+export class EcsEngine
 {
   private readonly _entities: Entity[] = [];
   private readonly _updateSystems: IUpdateSystem[] = [];
@@ -97,22 +97,22 @@ export class Entity
 
 export interface IUpdateSystem
 {
-  update(container: EcsContainer): void;
+  update(engine: EcsEngine): void;
 }
 
 export interface IInitSystem
 {
-  init(container: EcsContainer): void;
+  init(engine: EcsEngine): void;
 }
 
 export class Query
 {
-  private _container: EcsContainer = new EcsContainer();
+  private _engine: EcsEngine = new EcsEngine();
   
-  public static byContainer(container: EcsContainer): Query
+  public static byEngine(engine: EcsEngine): Query
   {
     let query = new Query();
-    query._container = container;
+    query._engine = engine;
     
     return query;
   }
@@ -126,7 +126,7 @@ export class Query
     if (c2 != null && c3 != null && c4 != null)
     {
       let selector = (x: Entity) => x.has(c1) && x.has(c2) && x.has(c3) && x.has(c4);
-      let entities = this._container.entities(selector);
+      let entities = this._engine.entities(selector);
       
       let result: [Entity, T1, T2, T3, T4][] = [];
       entities.forEach(x => result.push([x, x.get(c1), x.get(c2), x.get(c3), x.get(c4)]));
@@ -136,7 +136,7 @@ export class Query
     else if (c2 != null && c3 != null)
     {
       let selector = (x: Entity) => x.has(c1) && x.has(c2) && x.has(c3);
-      let entities = this._container.entities(selector);
+      let entities = this._engine.entities(selector);
       
       let result: [Entity, T1, T2, T3][] = [];
       entities.forEach(x => result.push([x, x.get(c1), x.get(c2), x.get(c3)]));
@@ -146,7 +146,7 @@ export class Query
     else if (c2 != null)
     {
       let selector = (x: Entity) => x.has(c1) && x.has(c2);
-      let entities = this._container.entities(selector);
+      let entities = this._engine.entities(selector);
       
       let result: [Entity, T1, T2][] = [];
       entities.forEach(x => result.push([x, x.get(c1), x.get(c2)]));
@@ -156,7 +156,7 @@ export class Query
     else
     {
       let selector = (x: Entity) => x.has(c1);
-      let entities = this._container.entities(selector);
+      let entities = this._engine.entities(selector);
       
       let result: [Entity, T1][] = [];
       entities.forEach(x => result.push([x, x.get(c1)]));

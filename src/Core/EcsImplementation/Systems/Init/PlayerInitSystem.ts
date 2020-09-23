@@ -1,4 +1,4 @@
-import {EcsContainer, Entity, IInitSystem} from "../../../EcsDraft/Container";
+import {EcsEngine, Entity, IInitSystem} from "../../../EcsDraft/Ecs";
 import {SpriteSheet} from "../../../View/SpriteSheet";
 import {Animation} from "../../../View/Animation";
 import {Animator} from "../../../View/Animator";
@@ -7,7 +7,7 @@ import {PositionComponent} from "../../Components/PositionComponent";
 
 export class PlayerInitSystem implements IInitSystem
 {
-  init(container: EcsContainer): void
+  init(engine: EcsEngine): void
   {
     let entity = new Entity();
     let playerImage = love.graphics.newImage("res/images/idle.png");
@@ -37,6 +37,6 @@ export class PlayerInitSystem implements IInitSystem
     entity.set(DrawComponent, {image: playerImage, spriteSheet: sheet, animator: animator});
     entity.set(PositionComponent, {x: 114, y: 150});
   
-    container.addEntity(entity);
+    engine.addEntity(entity);
   }
 }

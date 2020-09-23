@@ -1,5 +1,5 @@
 import {GameConsole} from "./Core/Tools/GameConsole";
-import {EcsContainer, Entity} from "./Core/EcsDraft/Container";
+import {EcsEngine, Entity} from "./Core/EcsDraft/Ecs";
 import {PlayerMovementSystem} from "./Core/EcsImplementation/Systems/PlayerMovementSystem";
 import {DrawSystem} from "./Core/EcsImplementation/Systems/DrawSystem";
 import {PlayerInitSystem} from "./Core/EcsImplementation/Systems/Init/PlayerInitSystem";
@@ -14,11 +14,11 @@ let scale = {
 
 const backgroundImage = love.graphics.newImage("res/images/background.png");
 
-let container = new EcsContainer();
-container.addSystem(new PlayerInitSystem());
-container.addSystem(new DrawSystem());
-container.addSystem(new PlayerMovementSystem());
-container.initialize();
+let engine = new EcsEngine();
+engine.addSystem(new PlayerInitSystem());
+engine.addSystem(new DrawSystem());
+engine.addSystem(new PlayerMovementSystem());
+engine.initialize();
 
 love.load = () =>
 {
@@ -58,6 +58,6 @@ love.draw = () =>
   love.graphics.setColor(1, 1, 1, 1);
   love.graphics.draw(backgroundImage);
   
-  container.update();
+  engine.update();
   GameConsole.draw();
 };

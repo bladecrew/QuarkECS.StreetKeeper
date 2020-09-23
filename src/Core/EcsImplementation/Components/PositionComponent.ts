@@ -1,4 +1,4 @@
-import {EcsComponent} from "../../EcsDraft/Container";
+import {EcsComponent} from "../../EcsDraft/Ecs";
 
 export interface IPositionComponent
 {
