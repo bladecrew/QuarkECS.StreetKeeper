@@ -32,7 +32,6 @@ export class PlayerMovementSystem implements IUpdateSystem
         
         function tryJump(dt: number, playerComponent: IPlayerComponent, positionComponent: IPositionComponent)
         {
-          
           if (!playerComponent.isJumping)
             return;
           

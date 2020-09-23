@@ -36,11 +36,11 @@ export class PlayerInitSystem implements IInitSystem
     animator.play("idle");
     
     entity.set(DrawComponent, {image: playerImage, spriteSheet: sheet, animator: animator});
-    entity.set(PositionComponent, {x: 114, y: 150});
+    entity.set(PositionComponent, {x: 114, y: 190});
     entity.set(PlayerComponent, {
       isFalling: false,
       isJumping: false,
-      jumpAcceleration: 0.5,
+      jumpAcceleration: 5.5,
       jumpTempAcceleration: 0,
       fallAcceleration: 0.5,
       fallTempAcceleration: 0
