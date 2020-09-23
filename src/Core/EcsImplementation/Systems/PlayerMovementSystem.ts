@@ -1,8 +1,8 @@
-import {IUpdateSystem} from "../../EcsDraft/Container";
+import {EcsContainer, IUpdateSystem} from "../../EcsDraft/Container";
 
 export class PlayerMovementSystem implements IUpdateSystem
 {
-  update(): void
+  update(container: EcsContainer): void
   {
   }
 }

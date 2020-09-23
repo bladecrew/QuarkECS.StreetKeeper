@@ -1,7 +1,5 @@
 export class EcsContainer
 {
-  public static instance: EcsContainer;
-  
   private readonly _entities: Entity[] = [];
   private readonly _updateSystems: IUpdateSystem[] = [];
   private readonly _initSystems: IInitSystem[] = [];
@@ -12,14 +10,12 @@ export class EcsContainer
   
   public initialize(): void
   {
-    EcsContainer.instance = this;
-    
-    this._initSystems.forEach(x => x.init());
+    this._initSystems.forEach(x => x.init(this));
   }
   
   public update(): void
   {
-    this._updateSystems.forEach(x => x.update());
+    this._updateSystems.forEach(x => x.update(this));
   }
   
   public addSystem(system: IUpdateSystem | IInitSystem): void
@@ -101,25 +97,35 @@ export class Entity
 
 export interface IUpdateSystem
 {
-  update(): void;
+  update(container: EcsContainer): void;
 }
 
 export interface IInitSystem
 {
-  init(): void;
+  init(container: EcsContainer): void;
 }
 
 export class Query
 {
-  static filteredEntities<T1>(c1: Component<T1>): [Entity, T1][];
-  static filteredEntities<T1, T2>(c1: Component<T1>, c2: Component<T2>): [Entity, T1, T2][];
-  static filteredEntities<T1, T2>(c1: Component<T1>, c2?: Component<T2>): [Entity, T1][] | [Entity, T1, T2][]
+  private _container:EcsContainer = new EcsContainer();
+  
+  public static byContainer(container: EcsContainer):Query
+  {
+    let query = new Query();
+    query._container = container;
+    
+    return query;
+  }
+  
+  get<T1>(c1: Component<T1>): [Entity, T1][];
+  get<T1, T2>(c1: Component<T1>, c2: Component<T2>): [Entity, T1, T2][];
+  get<T1, T2>(c1: Component<T1>, c2?: Component<T2>): [Entity, T1][] | [Entity, T1, T2][]
   {
     let selector = c2 != null
       ? (x: Entity) => x.has(c1) && x.has(c2)
       : (x: Entity) => x.has(c1);
     
-    let entities = EcsContainer.instance.entities(selector);
+    let entities = this._container.entities(selector);
     
     if (c2 != null)
     {

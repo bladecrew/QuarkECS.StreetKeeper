@@ -7,7 +7,7 @@ import {PositionComponent} from "../../Components/PositionComponent";
 
 export class PlayerInitSystem implements IInitSystem
 {
-  init(): void
+  init(container: EcsContainer): void
   {
     let entity = new Entity();
     let playerImage = love.graphics.newImage("res/images/idle.png");
@@ -36,7 +36,7 @@ export class PlayerInitSystem implements IInitSystem
     
     entity.set(DrawComponent, {image: playerImage, spriteSheet: sheet, animator: animator});
     entity.set(PositionComponent, {x: 114, y: 150});
-    
-    EcsContainer.instance.addEntity(entity);
+  
+    container.addEntity(entity);
   }
 }
