@@ -1,13 +1,12 @@
-import {IComponent} from "../../EcsDraft/Container";
 import {SpriteSheet} from "../../View/SpriteSheet";
 import {Animator} from "../../View/Animator";
+import {EcsComponent} from "../../EcsDraft/Container";
 
-export class DrawComponent implements IComponent
+interface IDraw
 {
-  constructor(
-    public readonly image: Image,
-    public readonly spriteSheet: SpriteSheet,
-    public readonly animator: Animator
-  )
-  {}
+  image: Image;
+  spriteSheet: SpriteSheet;
+  animator: Animator;
 }
+
+export const DrawComponent = EcsComponent<IDraw>("DrawComponent");

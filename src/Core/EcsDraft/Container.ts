@@ -17,7 +17,7 @@ export class EcsContainer
     this._initSystems.forEach(x => x.init());
   }
   
-  public update(dt: number): void
+  public update(): void
   {
     this._updateSystems.forEach(x => x.update());
   }
@@ -57,12 +57,12 @@ export class EcsContainer
     this._entities.splice(index, 1);
   }
   
-  public entities<T extends IComponent>(): Entity[]
+  public entities(selector: (x: Entity) => boolean): Entity[]
   {
     let entities: Entity[] = [];
     this._entities.forEach(x =>
     {
-      if (x.hasComponent<T>())
+      if (selector(x))
         entities.push(x);
     });
     
@@ -72,43 +72,31 @@ export class EcsContainer
 
 export class Entity
 {
-  private readonly _components: IComponent[] = [];
+  private readonly _components: Record<string, any> = {};
   
-  public hasComponent<T>(): boolean
+  public has(component: Component<any>): boolean
   {
-    return this.component<T>() != undefined;
+    return this._components.hasOwnProperty(component);
   }
   
-  public addComponent<T extends IComponent>(component: T): void | IComponent
+  public set<T>(component: Component<T>, value: T): void
   {
-    if (this.hasComponent<T>())
-      return this.component<T>();
+    this._components[component] = value;
+  }
+  
+  remove(component: Component<any>): void
+  {
+    delete this._components[component];
+  }
+  
+  public get<T>(component: Component<T>): T
+  {
+    const value = this._components[component];
+    if (!value)
+      throw new TypeError("Component type not present.");
     
-    this._components.push(component);
+    return value;
   }
-  
-  public removeComponent<T extends IComponent>(): void
-  {
-    let $component = this.component<T>();
-    if ($component == null)
-      return;
-    
-    let index = this._components.indexOf($component);
-    this._components.slice(index, 1);
-  }
-  
-  public component<T extends IComponent>(): T | undefined
-  {
-    let $component = this._components.find(x => (x as T) != null);
-    if ($component == null)
-      return undefined;
-    
-    return $component as T;
-  }
-}
-
-export interface IComponent
-{
 }
 
 export interface IUpdateSystem
@@ -121,12 +109,38 @@ export interface IInitSystem
   init(): void;
 }
 
-export class Filter<T extends IComponent>
+export class Query
 {
-  constructor() {}
-  
-  public entities(): Entity[]
+  static filteredEntities<T1>(c1: Component<T1>): [Entity, T1][];
+  static filteredEntities<T1, T2>(c1: Component<T1>, c2: Component<T2>): [Entity, T1, T2][];
+  static filteredEntities<T1, T2>(c1: Component<T1>, c2?: Component<T2>): [Entity, T1][] | [Entity, T1, T2][]
   {
-    return EcsContainer.instance.entities<T>();
+    let selector = c2 != null 
+      ? (x: Entity) => x.has(c1) && x.has(c2)
+      : (x: Entity) => x.has(c1);
+    
+    let entities = EcsContainer.instance.entities(selector);
+    
+    if(c2 != null)
+    {
+      let result: [Entity, T1, T2][] = [];
+      entities.forEach(x => result.push([x, x.get(c1), x.get(c2)]));
+  
+      return result;
+    }
+    else
+    {
+      let result: [Entity, T1][] = [];
+      entities.forEach(x => result.push([x, x.get(c1)]));
+  
+      return result;
+    }
   }
-}  
+}
+
+export type Component<T> = string & { type: T }
+
+export function EcsComponent<T>(name: string): Component<T>
+{
+  return name as Component<T>;
+}

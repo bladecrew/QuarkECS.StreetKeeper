@@ -1,10 +1,9 @@
-import {IController} from "../Core/ViewModel/IController";
 import {SpriteSheet} from "../Core/View/SpriteSheet";
 import {Animator} from "../Core/View/Animator";
 import {Phys} from "../Core/Utils/Phys";
 import {GameConsole} from "../Core/Tools/GameConsole";
 
-export class PlayerMovementController implements IController
+export class PlayerMovementController 
 {
   private _isJumping = false;
   private _jumpAcceleration = 5;

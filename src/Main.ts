@@ -1,6 +1,8 @@
-import {Player} from "./Scripts/Player";
 import {GameConsole} from "./Core/Tools/GameConsole";
-import {PlayerMovementController} from "./Scripts/PlayerMovementController";
+import {EcsContainer, Entity} from "./Core/EcsDraft/Container";
+import {PlayerMovementSystem} from "./Core/EcsImplementation/Systems/PlayerMovementSystem";
+import {DrawSystem} from "./Core/EcsImplementation/Systems/DrawSystem";
+import {PlayerInitSystem} from "./Core/EcsImplementation/Systems/Init/PlayerInitSystem";
 
 const GAME_WIDTH = 512;
 const GAME_HEIGHT = 288;
@@ -12,7 +14,11 @@ let scale = {
 
 const backgroundImage = love.graphics.newImage("res/images/background.png");
 
-let player: Player;
+let container = new EcsContainer();
+container.addSystem(new PlayerInitSystem());
+container.addSystem(new DrawSystem());
+container.addSystem(new PlayerMovementSystem());
+container.initialize();
 
 love.load = () =>
 {
@@ -34,26 +40,24 @@ love.load = () =>
   
   scale.x = love.graphics.getWidth() / GAME_WIDTH;
   scale.y = love.graphics.getHeight() / GAME_HEIGHT;
-  
-  player = new Player();
-  player.addController(new PlayerMovementController());
 };
+
+let deltaTime: number = 0;
 
 love.update = dt =>
 {
   if (love.keyboard.isDown("escape"))
     love.event.quit();
   
-  player.update(dt);
+  deltaTime = dt;
 };
 
 love.draw = () =>
 {
   love.graphics.scale(scale.x, scale.y);
   love.graphics.setColor(1, 1, 1, 1);
-  
   love.graphics.draw(backgroundImage);
   
-  player.draw();
+  container.update();
   GameConsole.draw();
 };

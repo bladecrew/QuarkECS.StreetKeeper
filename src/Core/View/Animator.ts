@@ -51,8 +51,6 @@ export class Animator
   public update(dt: number): void
   {
     if (this._currentAnimation != null)
-    {
       this._currentAnimation.update(dt);
-    }
   }
 }
