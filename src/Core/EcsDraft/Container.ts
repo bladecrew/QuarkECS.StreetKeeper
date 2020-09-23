@@ -93,7 +93,7 @@ export class Entity
   {
     const value = this._components[component];
     if (!value)
-      throw new TypeError("Component type not present.");
+      throw new TypeError("Component doesnt found");
     
     return value;
   }
@@ -115,24 +115,24 @@ export class Query
   static filteredEntities<T1, T2>(c1: Component<T1>, c2: Component<T2>): [Entity, T1, T2][];
   static filteredEntities<T1, T2>(c1: Component<T1>, c2?: Component<T2>): [Entity, T1][] | [Entity, T1, T2][]
   {
-    let selector = c2 != null 
+    let selector = c2 != null
       ? (x: Entity) => x.has(c1) && x.has(c2)
       : (x: Entity) => x.has(c1);
     
     let entities = EcsContainer.instance.entities(selector);
     
-    if(c2 != null)
+    if (c2 != null)
     {
       let result: [Entity, T1, T2][] = [];
       entities.forEach(x => result.push([x, x.get(c1), x.get(c2)]));
-  
+      
       return result;
     }
     else
     {
       let result: [Entity, T1][] = [];
       entities.forEach(x => result.push([x, x.get(c1)]));
-  
+      
       return result;
     }
   }
