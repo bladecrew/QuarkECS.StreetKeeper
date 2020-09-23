@@ -3,6 +3,7 @@ export class EcsEngine
   private readonly _entities: Entity[] = [];
   private readonly _updateSystems: IUpdateSystem[] = [];
   private readonly _initSystems: IInitSystem[] = [];
+  private readonly _customData: Record<string, any> = {};
   
   constructor()
   {
@@ -63,6 +64,20 @@ export class EcsEngine
     });
     
     return entities;
+  }
+  
+  public setData<T>(data: CustomData<T>, value: T): void
+  {
+    this._customData[data] = value;
+  }
+  
+  public getData<T>(data: CustomData<T>): T
+  {
+    const value = this._customData[data];
+    if (!value)
+      throw new TypeError("Data doesnt found");
+    
+    return value;
   }
 }
 
@@ -167,8 +182,13 @@ export class Query
 }
 
 export type Component<T> = string & { type: T }
-
-export function EcsComponent<T>(name: string): Component<T>
+export function component<T>(name: string): Component<T>
 {
   return name as Component<T>;
+}
+
+export type CustomData<T> = string & { type: T }
+export function customData<T>(name: string): CustomData<T>
+{
+  return name as CustomData<T>;
 }

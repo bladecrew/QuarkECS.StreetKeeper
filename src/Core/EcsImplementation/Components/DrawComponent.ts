@@ -1,6 +1,6 @@
 import {SpriteSheet} from "../../View/SpriteSheet";
 import {Animator} from "../../View/Animator";
-import {EcsComponent} from "../../EcsDraft/Ecs";
+import {component} from "../../EcsDraft/Ecs";
 
 interface IDraw
 {
@@ -9,4 +9,4 @@ interface IDraw
   animator: Animator;
 }
 
-export const DrawComponent = EcsComponent<IDraw>("DrawComponent");
+export const DrawComponent = component<IDraw>("DrawComponent");

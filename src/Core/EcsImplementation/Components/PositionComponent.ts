@@ -1,4 +1,4 @@
-import {EcsComponent} from "../../EcsDraft/Ecs";
+import {component} from "../../EcsDraft/Ecs";
 
 export interface IPositionComponent
 {
@@ -6,4 +6,4 @@ export interface IPositionComponent
   y: number;
 }
 
-export const PositionComponent = EcsComponent<IPositionComponent>("PositionComponent");
+export const PositionComponent = component<IPositionComponent>("PositionComponent");

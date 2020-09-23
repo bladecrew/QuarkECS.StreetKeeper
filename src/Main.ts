@@ -1,8 +1,10 @@
 import {GameConsole} from "./Core/Tools/GameConsole";
-import {EcsEngine, Entity} from "./Core/EcsDraft/Ecs";
+import {EcsEngine} from "./Core/EcsDraft/Ecs";
 import {PlayerMovementSystem} from "./Core/EcsImplementation/Systems/PlayerMovementSystem";
 import {DrawSystem} from "./Core/EcsImplementation/Systems/DrawSystem";
 import {PlayerInitSystem} from "./Core/EcsImplementation/Systems/Init/PlayerInitSystem";
+import {GameRuntimeData} from "./Core/EcsImplementation/Data/GameRuntimeData";
+import {AnimationSystem} from "./Core/EcsImplementation/Systems/AnimationSystem";
 
 const GAME_WIDTH = 512;
 const GAME_HEIGHT = 288;
@@ -17,6 +19,7 @@ const backgroundImage = love.graphics.newImage("res/images/background.png");
 let engine = new EcsEngine();
 engine.addSystem(new PlayerInitSystem());
 engine.addSystem(new DrawSystem());
+engine.addSystem(new AnimationSystem());
 engine.addSystem(new PlayerMovementSystem());
 engine.initialize();
 
@@ -42,14 +45,12 @@ love.load = () =>
   scale.y = love.graphics.getHeight() / GAME_HEIGHT;
 };
 
-let deltaTime: number = 0;
-
 love.update = dt =>
 {
   if (love.keyboard.isDown("escape"))
     love.event.quit();
   
-  deltaTime = dt;
+  engine.setData(GameRuntimeData, {deltaTime : dt});
 };
 
 love.draw = () =>
