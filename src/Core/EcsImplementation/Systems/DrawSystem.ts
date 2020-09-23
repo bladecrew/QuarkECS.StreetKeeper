@@ -6,7 +6,7 @@ export class DrawSystem implements IUpdateSystem
 {
   update(engine: EcsEngine): void
   {
-    Query.byEngine(engine).get(DrawComponent, PositionComponent).forEach(
+    new Query(engine).get(DrawComponent, PositionComponent).forEach(
       ([entity, drawComponent, positionComponent]) =>
       {
         love.graphics.draw(

@@ -4,6 +4,7 @@ export class EcsEngine
   private readonly _updateSystems: IUpdateSystem[] = [];
   private readonly _initSystems: IInitSystem[] = [];
   private readonly _customData: Record<string, any> = {};
+  private readonly _services: Record<string, any> = {};
   
   constructor()
   {
@@ -35,7 +36,7 @@ export class EcsEngine
   public removeEntity(entity: Entity): void
   {
     let index = this._entities.indexOf(entity);
-    if(index < 0)
+    if (index < 0)
       return;
     
     this._entities.splice(index, 1);
@@ -65,6 +66,20 @@ export class EcsEngine
       throw new TypeError("Data doesnt found");
     
     return value;
+  }
+  
+  public getService<T>(service: Service<T>): T
+  {
+    const value = this._services[service];
+    if (!value)
+      throw new TypeError("Data doesnt found");
+    
+    return value;
+  }
+  
+  public setService<T>(service: Service<T>, value: T): void
+  {
+    this._services[service] = value;
   }
 }
 
@@ -109,15 +124,11 @@ export interface IInitSystem
 
 export class Query
 {
-  private _engine: EcsEngine = new EcsEngine();
-  
-  public static byEngine(engine: EcsEngine): Query
-  {
-    let query = new Query();
-    query._engine = engine;
-    
-    return query;
-  }
+  constructor
+  (
+    private readonly _engine: EcsEngine
+  )
+  {}
   
   get<T1>(c1: Component<T1>): [Entity, T1][];
   get<T1, T2>(c1: Component<T1>, c2: Component<T2>): [Entity, T1, T2][];
@@ -169,13 +180,22 @@ export class Query
 }
 
 export type Component<T> = string & { type: T }
+
 export function component<T>(name: string): Component<T>
 {
   return name as Component<T>;
 }
 
 export type CustomData<T> = string & { type: T }
+
 export function customData<T>(name: string): CustomData<T>
 {
   return name as CustomData<T>;
+}
+
+export type Service<T> = string & { type: T }
+
+export function service<T>(name: string): Service<T>
+{
+  return name as Service<T>;
 }
