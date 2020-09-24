@@ -9,6 +9,7 @@ import {PlayerAnimationSystem} from "./Core/EcsImplementation/Systems/Player/Pla
 import {EnemySpawnSystem} from "./Core/EcsImplementation/Systems/Enemy/EnemySpawnSystem";
 import {EnemyMovementSystem} from "./Core/EcsImplementation/Systems/Enemy/EnemyMovementSystem";
 import {PlayerAttackSystem} from "./Core/EcsImplementation/Systems/Player/PlayerAttackSystem";
+import {EnemyAttackSystem} from "./Core/EcsImplementation/Systems/Enemy/EnemyAttackSystem";
 
 const GAME_WIDTH = 512;
 const GAME_HEIGHT = 288;
@@ -24,6 +25,7 @@ let engine = new EcsEngine();
 engine.addSystem(new PlayerInitSystem());
 engine.addSystem(new EnemySpawnSystem());
 engine.addSystem(new EnemyMovementSystem());
+engine.addSystem(new EnemyAttackSystem());
 engine.addSystem(new PlayerAttackSystem());
 engine.addSystem(new DrawSystem());
 engine.addSystem(new AnimationSystem());

@@ -6,7 +6,9 @@ export interface IEnemyComponent
   health: number;
   damage: number;
   speed: number;
+  damageDealingRange: number;
   attackRange: number;
+  attackPeriod: number; // seconds
 }
 
 export enum EnemyDirection

@@ -78,7 +78,9 @@ function kaban(position: IPositionComponent): Entity
     damage: 10,
     health: 100,
     speed: 20,
-    attackRange: 150
+    damageDealingRange: 150,
+    attackRange: 100,
+    attackPeriod: 1
   });
   
   entity.set(PositionComponent, position);

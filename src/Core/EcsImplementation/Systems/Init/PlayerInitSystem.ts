@@ -87,7 +87,8 @@ export class PlayerInitSystem implements IInitSystem
       isWalking: false,
       currentAttackType: "idle",
       attackDirection: "left",
-      score: 0
+      score: 0,
+      health: 3
     });
     
     engine.addEntity(entity);

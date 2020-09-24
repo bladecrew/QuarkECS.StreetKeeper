@@ -2,6 +2,7 @@ import {EcsEngine, IUpdateSystem, Query} from "../../../EcsDraft/Ecs";
 import {AttackType, PlayerComponent} from "../../Components/PlayerComponent";
 import {PositionComponent} from "../../Components/PositionComponent";
 import {EnemyComponent} from "../../Components/EnemyComponent";
+import {GameConsole} from "../../../Tools/GameConsole";
 
 export class PlayerAttackSystem implements IUpdateSystem
 {
@@ -16,7 +17,7 @@ export class PlayerAttackSystem implements IUpdateSystem
     query.get(EnemyComponent, PositionComponent).forEach(
       ([entity, enemy, position]) =>
       {
-        let isInRange = Math.abs(position.x - playerPosition.x) < enemy.attackRange;
+        let isInRange = Math.abs(position.x - playerPosition.x) < enemy.damageDealingRange;
         
         if(!isInRange)
           return;
@@ -31,6 +32,7 @@ export class PlayerAttackSystem implements IUpdateSystem
         {
           engine.removeEntity(entity);
           player.score++;
+          GameConsole.setValue("Player score", player.score);
         }
       });
   }

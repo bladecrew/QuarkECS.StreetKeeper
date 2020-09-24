@@ -6,6 +6,7 @@ export interface IPlayerComponent
   currentAttackType:AttackType;
   isWalking: boolean;
   score: number;
+  health: number;
 }
 
 export enum AttackType 
