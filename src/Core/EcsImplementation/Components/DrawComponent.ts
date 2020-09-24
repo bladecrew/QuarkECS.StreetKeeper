@@ -2,7 +2,7 @@ import {SpriteSheet} from "../../View/SpriteSheet";
 import {Animator} from "../../View/Animator";
 import {component} from "../../EcsDraft/Ecs";
 
-interface IDraw
+export interface IDraw
 {
   image: Image;
   spriteSheet: SpriteSheet;

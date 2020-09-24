@@ -1,4 +1,4 @@
-import {EcsEngine, IUpdateSystem, Query} from "../../EcsDraft/Ecs";
+import {EcsEngine, IUpdateSystem, query, Query} from "../../EcsDraft/Ecs";
 import {DrawComponent} from "../Components/DrawComponent";
 import {GameRuntimeData} from "../Data/GameRuntimeData";
 
@@ -8,8 +8,7 @@ export class AnimationSystem implements IUpdateSystem
   {
     let delta = engine.getData(GameRuntimeData).deltaTime;
     
-    new Query(engine).get(DrawComponent).forEach(
-      ([entity, drawComponent]) => drawComponent.animator.update(delta)
-    );
+    for (let [entity, drawComponent] of query(engine).get(DrawComponent))
+      drawComponent.animator.update(delta);
   }
 }

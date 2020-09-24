@@ -5,6 +5,7 @@ export class EcsEngine
   private readonly _initSystems: IInitSystem[] = [];
   private readonly _data: Record<string, any> = {};
   private readonly _services: Record<string, any> = {};
+  private readonly _eventComponents: Component<any>[] = [];
   
   constructor()
   {
@@ -18,14 +19,21 @@ export class EcsEngine
   public update(): void
   {
     this._updateSystems.forEach(x => x.update(this));
+    this._eventComponents.forEach(x => this._entities.forEach(y => y.remove(x)));
   }
   
   public addSystem(system: IUpdateSystem | IInitSystem): void
   {
     if ("update" in system)
       this._updateSystems.push(system);
-    else
+    if("init" in system)
+      
       this._initSystems.push(system);
+  } 
+  
+  public registerEventComponent<T>(eventComponent: Component<T>): void
+  {
+    this._eventComponents.push(eventComponent);
   }
   
   public addEntity(entity: Entity): void
@@ -177,6 +185,11 @@ export class Query
       return result;
     }
   }
+}
+
+export function query(engine:EcsEngine):Query
+{
+  return new Query(engine);
 }
 
 export type Component<T> = string & { type: T }

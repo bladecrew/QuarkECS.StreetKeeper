@@ -1,4 +1,4 @@
-import {Query, IUpdateSystem, EcsEngine} from "../../EcsDraft/Ecs";
+import {Query, IUpdateSystem, EcsEngine, query} from "../../EcsDraft/Ecs";
 import {DrawComponent} from "../Components/DrawComponent";
 import {PositionComponent} from "../Components/PositionComponent";
 
@@ -6,18 +6,17 @@ export class DrawSystem implements IUpdateSystem
 {
   update(engine: EcsEngine): void
   {
-    new Query(engine).get(DrawComponent, PositionComponent).forEach(
-      ([entity, drawComponent, positionComponent]) =>
-      {
-        love.graphics.draw(
-          drawComponent.spriteSheet.texture,
-          drawComponent.animator.currentAnimation()!.currentFrame(),
-          positionComponent.x,
-          positionComponent.y,
-          drawComponent.rotation,
-          drawComponent.scaleX,
-          drawComponent.scaleY
-        );
-      });
+    for (let [entity, drawComponent, positionComponent] of query(engine).get(DrawComponent, PositionComponent))
+    {
+      love.graphics.draw(
+        drawComponent.spriteSheet.texture,
+        drawComponent.animator.currentAnimation()!.currentFrame(),
+        positionComponent.x,
+        positionComponent.y,
+        drawComponent.rotation,
+        drawComponent.scaleX,
+        drawComponent.scaleY
+      );
+    }
   }
 }
