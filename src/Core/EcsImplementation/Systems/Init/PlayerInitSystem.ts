@@ -11,39 +11,81 @@ export class PlayerInitSystem implements IInitSystem
   init(engine: EcsEngine): void
   {
     let entity = new Entity();
-    let playerImage = love.graphics.newImage("res/images/idle.png");
-    let sheet = new SpriteSheet(playerImage, 7, 7);
+    let playerImage = love.graphics.newImage("res/images/hero.png");
+    
+    let sheet = new SpriteSheet(playerImage, 14, 10);
     let idleAnimation = new Animation(
       [
         sheet.frame(1, 1),
         sheet.frame(1, 2),
         sheet.frame(1, 3),
         sheet.frame(1, 4),
-        sheet.frame(1, 5),
-        sheet.frame(1, 6),
-        sheet.frame(1, 5),
-        sheet.frame(1, 4),
-        sheet.frame(1, 3),
-        sheet.frame(1, 2),
-        sheet.frame(1, 1)
+      
       ],
-      6,
+      10,
       true
     );
+    
+    let attackAnimationSimple = new Animation(
+      [
+        sheet.frame(2, 1),
+        sheet.frame(2, 2),
+        sheet.frame(2, 3),
+        sheet.frame(2, 4),
+        sheet.frame(2, 5),
+        sheet.frame(2, 6),
+        sheet.frame(2, 7),
+        sheet.frame(2, 8),
+      ],
+      20,
+      true
+    );
+    
+    let attackAnimationExtended = new Animation(
+      [
+        sheet.frame(11, 1),
+        sheet.frame(11, 2),
+        sheet.frame(11, 3),
+        sheet.frame(11, 4),
+        sheet.frame(11, 5),
+        sheet.frame(11, 6),
+        sheet.frame(11, 7),
+      ],
+      20,
+      true
+    );
+    
+    let walkAnimation = new Animation(
+      [
+        sheet.frame(1, 5),
+        sheet.frame(1, 6),
+        sheet.frame(1, 7),
+        sheet.frame(1, 8),
+      ],
+      10,
+      true
+    );
+    
     let animator = new Animator()
-      .addAnimation("idle", idleAnimation);
+      .addAnimation("idle", idleAnimation)
+      .addAnimation("simpleAttack", attackAnimationSimple)
+      .addAnimation("extendedAttack", attackAnimationExtended)
+      .addAnimation("walk", walkAnimation);
     
     animator.play("idle");
     
-    entity.set(DrawComponent, {image: playerImage, spriteSheet: sheet, animator: animator});
+    entity.set(DrawComponent, {
+      image: playerImage,
+      spriteSheet: sheet,
+      animator: animator,
+      rotation: 0,
+      scaleX: 1,
+      scaleY: 1
+    });
     entity.set(PositionComponent, {x: 114, y: 190});
     entity.set(PlayerComponent, {
-      isFalling: false,
-      isJumping: false,
-      jumpAcceleration: 5.5,
-      jumpTempAcceleration: 0,
-      fallAcceleration: 0.5,
-      fallTempAcceleration: 0
+      isWalking: false,
+      currentAttackType: "idle"
     });
     
     engine.addEntity(entity);

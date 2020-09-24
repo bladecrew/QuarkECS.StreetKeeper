@@ -5,6 +5,7 @@ export class Animation
   private _elapsed = 0;
   private _isPlaying = false;
   private _currentFrame = 1;
+  private _onFinished: any;
   
   constructor(private _quads: Quad[], fps: number, private _isLoop = false)
   {
@@ -33,6 +34,9 @@ export class Animation
     
     if (!this._isLoop)
       this.stop();
+    
+    if(this._onFinished != null)
+      this._onFinished();
   }
   
   public currentFrame(): Quad
@@ -40,8 +44,9 @@ export class Animation
     return this._quads[this._currentFrame];
   }
   
-  public play()
+  public play(onFinished?: () => {})
   {
+    this._onFinished = onFinished;
     this._isPlaying = true;
   }
   

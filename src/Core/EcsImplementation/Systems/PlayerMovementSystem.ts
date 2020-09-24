@@ -1,70 +1,74 @@
 import {EcsEngine, IUpdateSystem, Query} from "../../EcsDraft/Ecs";
 import {GameRuntimeData} from "../Data/GameRuntimeData";
-import {IPlayerComponent, PlayerComponent} from "../Components/PlayerComponent";
-import {IPositionComponent, PositionComponent} from "../Components/PositionComponent";
-import {Phys} from "../../Utils/Phys";
-import {GameConsole} from "../../Tools/GameConsole";
+import {AttackType, PlayerComponent} from "../Components/PlayerComponent";
+import {PositionComponent} from "../Components/PositionComponent";
+import {DrawComponent} from "../Components/DrawComponent";
 
 export class PlayerMovementSystem implements IUpdateSystem
 {
   update(engine: EcsEngine): void
   {
     let deltaTime = engine.getData(GameRuntimeData).deltaTime;
-    new Query(engine).get(PlayerComponent, PositionComponent).forEach(
-      ([entity, playerComponent, positionComponent]) =>
+    new Query(engine).get(PlayerComponent, PositionComponent, DrawComponent).forEach(
+      ([entity, playerComponent, positionComponent, drawComponent]) =>
       {
-        if (love.keyboard.isDown("left"))
-          positionComponent.x -= 100 * deltaTime;
+        if(love.keyboard.isDown("q"))
+        {
+          rotateToLeft();
+          playerComponent.currentAttackType = AttackType.Simple;
+        }
         
-        if (love.keyboard.isDown("right"))
+        if(love.keyboard.isDown("e"))
+        {
+          rotateToRight();
+          playerComponent.currentAttackType = AttackType.Simple;
+        }
+        
+        if(love.keyboard.isDown("d"))
+        {
+          rotateToRight();
+          playerComponent.currentAttackType = AttackType.Extended;
+        }
+        
+        if(love.keyboard.isDown("a"))
+        {
+          rotateToLeft();
+          playerComponent.currentAttackType = AttackType.Extended;
+        }
+        
+        if(love.keyboard.isDown("right"))
+        {
           positionComponent.x += 100 * deltaTime;
-        
-        if (love.keyboard.isDown("space") && !playerComponent.isJumping && !playerComponent.isFalling)
+          playerComponent.isWalking = true;
+          rotateToRight();
+        }
+        else if(love.keyboard.isDown("left"))
         {
-          playerComponent.jumpTempAcceleration = playerComponent.jumpAcceleration;
-          playerComponent.isJumping = true;
+          positionComponent.x -= 100 * deltaTime;
+          playerComponent.isWalking = true;
+          rotateToLeft();
+        }
+        else
+        {
+          playerComponent.isWalking = false;
         }
         
-        tryJump(deltaTime, playerComponent, positionComponent);
-        tryFall(deltaTime, playerComponent, positionComponent);
-        
-        GameConsole.setValue("position", `x :${Math.round(positionComponent.x)}, y :${Math.round(positionComponent.y)}`);
-        
-        function tryJump(dt: number, playerComponent: IPlayerComponent, positionComponent: IPositionComponent)
+        function rotateToLeft()
         {
-          if (!playerComponent.isJumping)
-            return;
-          
-          playerComponent.jumpTempAcceleration -= Phys.gravity * dt;
-          
-          if (playerComponent.jumpTempAcceleration < 0)
+          if(drawComponent.scaleX == 1 && playerComponent.currentAttackType == AttackType.Idle)
           {
-            playerComponent.isJumping = false;
-            playerComponent.isFalling = true;
-            playerComponent.fallTempAcceleration = playerComponent.fallAcceleration;
+            drawComponent.scaleX = -1;
+            positionComponent.x += 70;
           }
-          
-          positionComponent.y -= playerComponent.jumpTempAcceleration;
-          
-          GameConsole.setValue("jump acceleration", playerComponent.jumpTempAcceleration);
         }
         
-        function tryFall(dt: number, playerComponent: IPlayerComponent, positionComponent: IPositionComponent)
+        function rotateToRight()
         {
-          if (!playerComponent.isFalling)
-            return;
-          
-          playerComponent.fallTempAcceleration += Phys.gravity * dt;
-          
-          GameConsole.setValue("fall acceleration", playerComponent.fallTempAcceleration);
-          
-          positionComponent.y += playerComponent.fallTempAcceleration;
-          
-          if (positionComponent.y < 190)
-            return;
-          
-          positionComponent.y = 190;
-          playerComponent.isFalling = false;
+          if(drawComponent.scaleX == -1 && playerComponent.currentAttackType == AttackType.Idle)
+          {
+            drawComponent.scaleX = 1;
+            positionComponent.x -= 70;
+          }
         }
       }
     );

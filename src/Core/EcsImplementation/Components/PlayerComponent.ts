@@ -2,13 +2,16 @@ import {component} from "../../EcsDraft/Ecs";
 
 export interface IPlayerComponent
 {
-  isJumping: boolean;
-  jumpAcceleration: number;
-  jumpTempAcceleration: number;
+  currentAttackType:AttackType;
+  isWalking: boolean;
+}
+
+export enum AttackType 
+{
+  Idle = 'idle',
+  Simple = 'simpleAttack',
+  Extended = 'extendedAttack',
   
-  isFalling: boolean;
-  fallAcceleration: number;
-  fallTempAcceleration: number;
 }
 
 export const PlayerComponent = component<IPlayerComponent>("PlayerComponent");

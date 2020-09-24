@@ -5,6 +5,7 @@ import {DrawSystem} from "./Core/EcsImplementation/Systems/DrawSystem";
 import {PlayerInitSystem} from "./Core/EcsImplementation/Systems/Init/PlayerInitSystem";
 import {GameRuntimeData} from "./Core/EcsImplementation/Data/GameRuntimeData";
 import {AnimationSystem} from "./Core/EcsImplementation/Systems/AnimationSystem";
+import {PlayerAnimationSystem} from "./Core/EcsImplementation/Systems/PlayerAnimationSystem";
 
 const GAME_WIDTH = 512;
 const GAME_HEIGHT = 288;
@@ -14,13 +15,14 @@ let scale = {
   y: 1,
 };
 
-const backgroundImage = love.graphics.newImage("res/images/background.png");
+const backgroundImage = love.graphics.newImage("res/images/background1.png");
 
 let engine = new EcsEngine();
 engine.addSystem(new PlayerInitSystem());
 engine.addSystem(new DrawSystem());
 engine.addSystem(new AnimationSystem());
 engine.addSystem(new PlayerMovementSystem());
+engine.addSystem(new PlayerAnimationSystem());
 engine.initialize();
 
 love.load = () =>

@@ -7,6 +7,9 @@ interface IDraw
   image: Image;
   spriteSheet: SpriteSheet;
   animator: Animator;
+  rotation: number;
+  scaleX: number;
+  scaleY: number;
 }
 
 export const DrawComponent = component<IDraw>("DrawComponent");

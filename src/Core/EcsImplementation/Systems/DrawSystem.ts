@@ -13,7 +13,10 @@ export class DrawSystem implements IUpdateSystem
           drawComponent.spriteSheet.texture,
           drawComponent.animator.currentAnimation()!.currentFrame(),
           positionComponent.x,
-          positionComponent.y
+          positionComponent.y,
+          drawComponent.rotation,
+          drawComponent.scaleX,
+          drawComponent.scaleY
         );
       });
   }

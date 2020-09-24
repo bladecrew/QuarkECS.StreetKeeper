@@ -24,8 +24,15 @@ export class Animator
     return this._currentAnimation;
   }
   
-  public play(name: string): void
+  private _name: string = "";
+  
+  public play(name: string, onFinished?: () => {}): void
   {
+    if(this._name == name)
+      return;
+  
+    this._name = name;
+    
     if (this._animations[name] == null)
     {
       error(`animation '${name}' not found`);
@@ -33,7 +40,7 @@ export class Animator
     else
     {
       this._currentAnimation = this._animations[name];
-      this._currentAnimation.play();
+      this._currentAnimation.play(onFinished);
     }
   }
   
