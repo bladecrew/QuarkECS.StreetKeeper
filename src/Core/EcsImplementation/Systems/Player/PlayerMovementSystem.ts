@@ -1,8 +1,8 @@
-import {EcsEngine, IUpdateSystem, Query} from "../../EcsDraft/Ecs";
-import {GameRuntimeData} from "../Data/GameRuntimeData";
-import {AttackType, PlayerComponent} from "../Components/PlayerComponent";
-import {PositionComponent} from "../Components/PositionComponent";
-import {DrawComponent} from "../Components/DrawComponent";
+import {EcsEngine, IUpdateSystem, Query} from "../../../EcsDraft/Ecs";
+import {GameRuntimeData} from "../../Data/GameRuntimeData";
+import {AttackType, PlayerComponent} from "../../Components/PlayerComponent";
+import {PositionComponent} from "../../Components/PositionComponent";
+import {DrawComponent} from "../../Components/DrawComponent";
 
 export class PlayerMovementSystem implements IUpdateSystem
 {

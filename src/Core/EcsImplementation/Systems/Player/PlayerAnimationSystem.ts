@@ -1,6 +1,6 @@
-import {EcsEngine, IUpdateSystem, Query} from "../../EcsDraft/Ecs";
-import {AttackType, PlayerComponent} from "../Components/PlayerComponent";
-import {DrawComponent} from "../Components/DrawComponent";
+import {EcsEngine, IUpdateSystem, Query} from "../../../EcsDraft/Ecs";
+import {AttackType, PlayerComponent} from "../../Components/PlayerComponent";
+import {DrawComponent} from "../../Components/DrawComponent";
 
 export class PlayerAnimationSystem implements IUpdateSystem
 {
