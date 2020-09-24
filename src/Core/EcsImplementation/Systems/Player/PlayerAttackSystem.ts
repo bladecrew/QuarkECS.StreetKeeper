@@ -17,9 +17,7 @@ export class PlayerAttackSystem implements IUpdateSystem
     query.get(EnemyComponent, PositionComponent).forEach(
       ([entity, enemy, position]) =>
       {
-        let isInRange = Math.abs(position.x - playerPosition.x) < enemy.damageDealingRange;
-        
-        if(!isInRange)
+        if(Math.abs(position.x - playerPosition.x) > enemy.damageDealingRange)
           return;
         
         if(playerPosition.x < position.x && player.attackDirection == "right")
