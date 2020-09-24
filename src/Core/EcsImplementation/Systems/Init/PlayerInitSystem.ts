@@ -37,7 +37,7 @@ export class PlayerInitSystem implements IInitSystem
         sheet.frame(2, 7),
         sheet.frame(2, 8),
       ],
-      20,
+      15,
       true
     );
     
@@ -85,7 +85,9 @@ export class PlayerInitSystem implements IInitSystem
     entity.set(PositionComponent, {x: 114, y: 190});
     entity.set(PlayerComponent, {
       isWalking: false,
-      currentAttackType: "idle"
+      currentAttackType: "idle",
+      attackDirection: "left",
+      score: 0
     });
     
     engine.addEntity(entity);

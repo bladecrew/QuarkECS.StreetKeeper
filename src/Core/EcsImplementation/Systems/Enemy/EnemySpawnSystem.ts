@@ -8,7 +8,7 @@ import {IPositionComponent, PositionComponent} from "../../Components/PositionCo
 
 export class EnemySpawnSystem implements IUpdateSystem
 {
-  private readonly enemyEntities:EnemyEntities = new EnemyEntities();
+  private readonly enemyEntities: EnemyEntities = new EnemyEntities();
   
   update(engine: EcsEngine)
   {
@@ -33,13 +33,13 @@ export class EnemyEntities
   {
     this._currentWave++;
     
-    if(this._currentWave == 1)
+    if (this._currentWave == 1)
     {
-      let k1 = kaban({x: -30, y: 180})
-      let k2 = kaban({x: -60, y: 180})
-      let k3 = kaban({x: 600, y: 180})
-      let k4 = kaban({x: 660, y: 180})
-      let k5 = kaban({x: 720, y: 180})
+      let k1 = kaban({x: -30, y: 180});
+      let k2 = kaban({x: -60, y: 180});
+      let k3 = kaban({x: 600, y: 180});
+      let k4 = kaban({x: 660, y: 180});
+      let k5 = kaban({x: 720, y: 180});
       
       return [k1, k2, k3, k4, k5];
     }
@@ -73,8 +73,16 @@ function kaban(position: IPositionComponent): Entity
     .addAnimation("walk", kabanMovementAnimation);
   
   let entity = new Entity();
-  entity.set(EnemyComponent, {direction: EnemyDirection.Left, damage: 10, health: 100, speed: 20});
+  entity.set(EnemyComponent, {
+    direction: EnemyDirection.Left,
+    damage: 10,
+    health: 100,
+    speed: 20,
+    attackRange: 150
+  });
+  
   entity.set(PositionComponent, position);
+  
   entity.set(DrawComponent, {
     image: kabanImage,
     spriteSheet: kabanSheet,

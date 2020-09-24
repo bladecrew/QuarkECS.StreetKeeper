@@ -16,24 +16,28 @@ export class PlayerMovementSystem implements IUpdateSystem
         {
           rotateToLeft();
           playerComponent.currentAttackType = AttackType.Simple;
+          playerComponent.attackDirection = "left";
         }
         
         if(love.keyboard.isDown("e"))
         {
           rotateToRight();
           playerComponent.currentAttackType = AttackType.Simple;
+          playerComponent.attackDirection = "right";
         }
         
         if(love.keyboard.isDown("d"))
         {
           rotateToRight();
           playerComponent.currentAttackType = AttackType.Extended;
+          playerComponent.attackDirection = "right";
         }
         
         if(love.keyboard.isDown("a"))
         {
           rotateToLeft();
           playerComponent.currentAttackType = AttackType.Extended;
+          playerComponent.attackDirection = "left";
         }
         
         if(love.keyboard.isDown("right"))
