@@ -1,5 +1,4 @@
 import {GameConsole} from "./Core/Tools/GameConsole";
-import {EcsEngine} from "@h3xb0y/quark-ecs";
 import {PlayerMovementSystem} from "./Core/Ecs/Systems/Player/PlayerMovementSystem";
 import {DrawSystem} from "./Core/Ecs/Systems/DrawSystem";
 import {PlayerInitSystem} from "./Core/Ecs/Systems/Init/PlayerInitSystem";
@@ -10,6 +9,7 @@ import {EnemySpawnSystem} from "./Core/Ecs/Systems/Enemy/EnemySpawnSystem";
 import {EnemyMovementSystem} from "./Core/Ecs/Systems/Enemy/EnemyMovementSystem";
 import {PlayerAttackSystem} from "./Core/Ecs/Systems/Player/PlayerAttackSystem";
 import {EnemyAttackSystem} from "./Core/Ecs/Systems/Enemy/EnemyAttackSystem";
+import {EcsEngine} from "./Libs/quark-ecs/EcsEngine";
 
 const GAME_WIDTH = 512;
 const GAME_HEIGHT = 288;

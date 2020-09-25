@@ -1,8 +1,10 @@
-import {EcsEngine, IUpdateSystem, query, Query} from "@h3xb0y/quark-ecs";
 import {GameRuntimeData} from "../../Data/GameRuntimeData";
 import {AttackType, IPlayerComponent, PlayerComponent} from "../../Components/PlayerComponent";
 import {IPositionComponent, PositionComponent} from "../../Components/PositionComponent";
 import {DrawComponent, IDraw} from "../../Components/DrawComponent";
+import {query} from "../../../../Libs/quark-ecs/Query";
+import {EcsEngine} from "../../../../Libs/quark-ecs/EcsEngine";
+import {IUpdateSystem} from "../../../../Libs/quark-ecs/System";
 
 export class PlayerMovementSystem implements IUpdateSystem
 {

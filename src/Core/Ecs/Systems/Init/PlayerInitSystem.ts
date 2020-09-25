@@ -1,10 +1,12 @@
-import {EcsEngine, Entity, IInitSystem} from "@h3xb0y/quark-ecs";
+import {EcsEngine} from "../../../../Libs/quark-ecs/EcsEngine";
 import {SpriteSheet} from "../../../View/SpriteSheet";
 import {Animation} from "../../../View/Animation";
 import {Animator} from "../../../View/Animator";
 import {DrawComponent} from "../../Components/DrawComponent";
 import {PositionComponent} from "../../Components/PositionComponent";
 import {PlayerComponent} from "../../Components/PlayerComponent";
+import {IInitSystem} from "../../../../Libs/quark-ecs/System";
+import {Entity} from "../../../../Libs/quark-ecs/Entity";
 
 export class PlayerInitSystem implements IInitSystem
 {

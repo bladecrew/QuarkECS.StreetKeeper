@@ -4,7 +4,9 @@ import {EnemyComponent} from "../../Components/EnemyComponent";
 import {EnemyAttackTimeComponent} from "../../Components/EnemyAttackTimeComponent";
 import {GameRuntimeData} from "../../Data/GameRuntimeData";
 import {GameConsole} from "../../../Tools/GameConsole";
-import {EcsEngine, IUpdateSystem, query} from "@h3xb0y/quark-ecs";
+import {IUpdateSystem} from "../../../../Libs/quark-ecs/System";
+import {EcsEngine} from "../../../../Libs/quark-ecs/EcsEngine";
+import {query} from "../../../../Libs/quark-ecs/Query";
 
 export class EnemyAttackSystem implements IUpdateSystem
 {

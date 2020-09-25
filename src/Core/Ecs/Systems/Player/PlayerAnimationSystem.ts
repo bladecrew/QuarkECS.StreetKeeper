@@ -1,6 +1,8 @@
-import {EcsEngine, IUpdateSystem, query, Query} from "@h3xb0y/quark-ecs";
 import {AttackType, PlayerComponent} from "../../Components/PlayerComponent";
 import {DrawComponent} from "../../Components/DrawComponent";
+import {EcsEngine} from "../../../../Libs/quark-ecs/EcsEngine";
+import {IUpdateSystem} from "../../../../Libs/quark-ecs/System";
+import {query} from "../../../../Libs/quark-ecs/Query";
 
 export class PlayerAnimationSystem implements IUpdateSystem
 {

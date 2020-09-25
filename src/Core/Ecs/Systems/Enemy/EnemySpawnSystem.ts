@@ -1,10 +1,13 @@
-import {EcsEngine, Entity, IUpdateSystem, query, Query} from "@h3xb0y/quark-ecs";
+import {IUpdateSystem} from "../../../../Libs/quark-ecs/System";
+import {EcsEngine} from "../../../../Libs/quark-ecs/EcsEngine";
+import {query} from "../../../../Libs/quark-ecs/Query";
 import {SpriteSheet} from "../../../View/SpriteSheet";
 import {Animation} from "../../../View/Animation";
 import {EnemyComponent, EnemyDirection} from "../../Components/EnemyComponent";
 import {DrawComponent} from "../../Components/DrawComponent";
 import {Animator} from "../../../View/Animator";
 import {IPositionComponent, PositionComponent} from "../../Components/PositionComponent";
+import {Entity} from "../../../../Libs/quark-ecs/Entity";
 
 export class EnemySpawnSystem implements IUpdateSystem
 {

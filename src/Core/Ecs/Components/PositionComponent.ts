@@ -1,4 +1,4 @@
-import {component} from "@h3xb0y/quark-ecs";
+import {component} from "../../../Libs/quark-ecs/Types";
 
 export interface IPositionComponent
 {

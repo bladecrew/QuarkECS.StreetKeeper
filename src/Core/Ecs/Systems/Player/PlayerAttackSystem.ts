@@ -1,8 +1,11 @@
-import {EcsEngine, Entity, IUpdateSystem, query, Query} from "@h3xb0y/quark-ecs";
 import {AttackType, IPlayerComponent, PlayerComponent} from "../../Components/PlayerComponent";
 import {PositionComponent} from "../../Components/PositionComponent";
 import {EnemyComponent} from "../../Components/EnemyComponent";
 import {GameConsole} from "../../../Tools/GameConsole";
+import {IUpdateSystem} from "../../../../Libs/quark-ecs/System";
+import {EcsEngine} from "../../../../Libs/quark-ecs/EcsEngine";
+import {Query} from "../../../../Libs/quark-ecs/Query";
+import {Entity} from "../../../../Libs/quark-ecs/Entity";
 
 export class PlayerAttackSystem implements IUpdateSystem
 {

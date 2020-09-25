@@ -1,6 +1,8 @@
 import {DrawComponent} from "../Components/DrawComponent";
 import {PositionComponent} from "../Components/PositionComponent";
-import {EcsEngine, IUpdateSystem, query} from "@h3xb0y/quark-ecs";
+import {EcsEngine} from "../../../Libs/quark-ecs/EcsEngine";
+import {query} from "../../../Libs/quark-ecs/Query";
+import {IUpdateSystem} from "../../../Libs/quark-ecs/System";
 
 export class DrawSystem implements IUpdateSystem
 {

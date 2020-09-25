@@ -1,5 +1,4 @@
-import {component} from "@h3xb0y/quark-ecs";
-import {EnemyComponent} from "./EnemyComponent";
+import {component} from "../../../Libs/quark-ecs/Types";
 
 export interface IEnemyAttackTimeComponent
 {

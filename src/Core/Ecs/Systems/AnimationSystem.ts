@@ -1,6 +1,8 @@
-import {EcsEngine, IUpdateSystem, query, Query} from "@h3xb0y/quark-ecs";
 import {DrawComponent} from "../Components/DrawComponent";
 import {GameRuntimeData} from "../Data/GameRuntimeData";
+import {IUpdateSystem} from "../../../Libs/quark-ecs/System";
+import {EcsEngine} from "../../../Libs/quark-ecs/EcsEngine";
+import {query} from "../../../Libs/quark-ecs/Query";
 
 export class AnimationSystem implements IUpdateSystem
 {

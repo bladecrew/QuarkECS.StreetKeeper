@@ -1,6 +1,6 @@
 import {SpriteSheet} from "../../View/SpriteSheet";
 import {Animator} from "../../View/Animator";
-import {component} from "@h3xb0y/quark-ecs";
+import {component} from "../../../Libs/quark-ecs/Types";
 
 export interface IDraw
 {
