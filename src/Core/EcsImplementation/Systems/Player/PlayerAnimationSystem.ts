@@ -6,20 +6,20 @@ export class PlayerAnimationSystem implements IUpdateSystem
 {
   update(engine: EcsEngine): void
   {
-    for (let [playerComponent, drawComponent] of query(engine).get(PlayerComponent, DrawComponent))
+    for (let [player, draw] of query(engine).get(PlayerComponent, DrawComponent))
     {
-      if (playerComponent.currentAttackType != AttackType.Idle)
+      if (player.currentAttackType != AttackType.Idle)
       {
-        let resetAttack = () => playerComponent.currentAttackType = AttackType.Idle;
-        drawComponent.animator.play(playerComponent.currentAttackType, resetAttack);
+        let resetAttack = () => player.currentAttackType = AttackType.Idle;
+        draw.animator.play(player.currentAttackType, resetAttack);
       }
-      else if (playerComponent.isWalking)
+      else if (player.isWalking)
       {
-        drawComponent.animator.play("walk");
+        draw.animator.play("walk");
       }
       else
       {
-        drawComponent.animator.play("idle");
+        draw.animator.play("idle");
       }
     }
   }

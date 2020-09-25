@@ -25,15 +25,13 @@ export class EnemyEntities
   
   public entities(): Entity[]
   {
-    this._currentWave++;
-    
-    if (this._currentWave == 1)
+    if (this._currentWave++ == 1)
     {
-      let k1 = kaban({x: -30, y: 180});
-      let k2 = kaban({x: -60, y: 180});
-      let k3 = kaban({x: 600, y: 180});
-      let k4 = kaban({x: 660, y: 180});
-      let k5 = kaban({x: 720, y: 180});
+      let k1 = godzilla({x: -30, y: 180});
+      let k2 = godzilla({x: -60, y: 180});
+      let k3 = godzilla({x: 600, y: 180});
+      let k4 = godzilla({x: 660, y: 180});
+      let k5 = godzilla({x: 720, y: 180});
       
       return [k1, k2, k3, k4, k5];
     }
@@ -44,27 +42,27 @@ export class EnemyEntities
 
 //region @Enemies
 
-function kaban(position: IPositionComponent): Entity
+function godzilla(position: IPositionComponent): Entity
 {
-  let kabanImage = love.graphics.newImage("res/images/monster.png");
-  let kabanSheet = new SpriteSheet(kabanImage, 3, 5);
-  let kabanMovementAnimation = new Animation(
+  let godzillaImage = love.graphics.newImage("res/images/monster.png");
+  let godzillaSheet = new SpriteSheet(godzillaImage, 3, 5);
+  let godzillaMovementAnimation = new Animation(
     [
-      kabanSheet.frame(1, 1),
-      kabanSheet.frame(1, 2),
-      kabanSheet.frame(1, 3),
-      kabanSheet.frame(1, 4),
-      kabanSheet.frame(2, 1),
-      kabanSheet.frame(2, 2),
-      kabanSheet.frame(2, 3),
-      kabanSheet.frame(2, 4)
+      godzillaSheet.frame(1, 1),
+      godzillaSheet.frame(1, 2),
+      godzillaSheet.frame(1, 3),
+      godzillaSheet.frame(1, 4),
+      godzillaSheet.frame(2, 1),
+      godzillaSheet.frame(2, 2),
+      godzillaSheet.frame(2, 3),
+      godzillaSheet.frame(2, 4)
     ],
     10,
     true
   );
   
-  let kabanAnimator = new Animator()
-    .addAnimation("walk", kabanMovementAnimation);
+  let godzillaAnimator = new Animator()
+    .addAnimation("walk", godzillaMovementAnimation);
   
   let entity = new Entity();
   entity.set(EnemyComponent, {
@@ -80,15 +78,15 @@ function kaban(position: IPositionComponent): Entity
   entity.set(PositionComponent, position);
   
   entity.set(DrawComponent, {
-    image: kabanImage,
-    spriteSheet: kabanSheet,
-    animator: kabanAnimator,
+    image: godzillaImage,
+    spriteSheet: godzillaSheet,
+    animator: godzillaAnimator,
     rotation: 0,
     scaleX: -1,
     scaleY: 1
   });
   
-  kabanAnimator.play("walk");
+  godzillaAnimator.play("walk");
   
   return entity;
 }

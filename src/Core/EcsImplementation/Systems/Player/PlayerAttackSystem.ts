@@ -20,17 +20,17 @@ export class PlayerAttackSystem implements IUpdateSystem
         continue;
       
       if (playerPosition.x < position.x && player.attackDirection == "right")
-        kill(engine, entity, player);
+        this.kill(engine, entity, player);
       
       if (playerPosition.x > position.x && player.attackDirection == "left")
-        kill(engine, entity, player);
+        this.kill(engine, entity, player);
     }
   }
+  
+  private kill(engine: EcsEngine, entity: Entity, player: IPlayerComponent): void
+  {
+    engine.removeEntity(entity);
+    player.score++;
+    GameConsole.setValue("Player score", player.score);
+  };
 }
-
-const kill = (engine: EcsEngine, entity: Entity, player: IPlayerComponent) =>
-{
-  engine.removeEntity(entity);
-  player.score++;
-  GameConsole.setValue("Player score", player.score);
-};
