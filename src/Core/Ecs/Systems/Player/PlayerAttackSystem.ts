@@ -1,4 +1,4 @@
-import {EcsEngine, Entity, IUpdateSystem, query, Query} from "../../../EcsDraft/Ecs";
+import {EcsEngine, Entity, IUpdateSystem, query, Query} from "@h3xb0y/quark-ecs";
 import {AttackType, IPlayerComponent, PlayerComponent} from "../../Components/PlayerComponent";
 import {PositionComponent} from "../../Components/PositionComponent";
 import {EnemyComponent} from "../../Components/EnemyComponent";

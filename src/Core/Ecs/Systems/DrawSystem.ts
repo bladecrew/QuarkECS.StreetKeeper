@@ -1,6 +1,6 @@
-import {Query, IUpdateSystem, EcsEngine, query} from "../../EcsDraft/Ecs";
 import {DrawComponent} from "../Components/DrawComponent";
 import {PositionComponent} from "../Components/PositionComponent";
+import {EcsEngine, IUpdateSystem, query} from "@h3xb0y/quark-ecs";
 
 export class DrawSystem implements IUpdateSystem
 {

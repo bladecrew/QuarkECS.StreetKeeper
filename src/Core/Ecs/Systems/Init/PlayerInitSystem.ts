@@ -1,4 +1,4 @@
-import {EcsEngine, Entity, IInitSystem} from "../../../EcsDraft/Ecs";
+import {EcsEngine, Entity, IInitSystem} from "@h3xb0y/quark-ecs";
 import {SpriteSheet} from "../../../View/SpriteSheet";
 import {Animation} from "../../../View/Animation";
 import {Animator} from "../../../View/Animator";

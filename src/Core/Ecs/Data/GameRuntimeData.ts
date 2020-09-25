@@ -1,4 +1,4 @@
-import {data} from "../../EcsDraft/Ecs";
+import {data} from "@h3xb0y/quark-ecs";
 
 export interface IGameRuntimeData
 {

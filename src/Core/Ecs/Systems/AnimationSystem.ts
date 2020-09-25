@@ -1,4 +1,4 @@
-import {EcsEngine, IUpdateSystem, query, Query} from "../../EcsDraft/Ecs";
+import {EcsEngine, IUpdateSystem, query, Query} from "@h3xb0y/quark-ecs";
 import {DrawComponent} from "../Components/DrawComponent";
 import {GameRuntimeData} from "../Data/GameRuntimeData";
 

@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@h3xb0y/quark-ecs@^0.0.14":
+  version "0.0.14"
+  resolved "https://npm.pkg.github.com/download/@h3xb0y/quark-ecs/0.0.14/4acdadc43272a723779d9729e9e79c7996ca30a16f62a669ccac0a4672408d16#f589acf92b5c4c2ce9e2ca0b9210043de7efdaba"
+  integrity sha512-yvud5+NIbMJhacrc1Cz6IGYFZUY+sGagQQvPZPqplzf5NjAxq7sJ/9S6/R36IFdOjUjtyn+RHyQ+PVIPoPzdDQ==
+
 ansi-regex@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.1.1.tgz#c3b33ab5ee360d86e0e628f0468ae7ef27d654df"
@@ -1292,9 +1297,12 @@ through2@^2.0.1:
     readable-stream "~2.3.6"
     xtend "~4.0.1"
 
-tiny-ecs@bakpakin/tiny-ecs:
-  version "0.0.0"
-  resolved "https://codeload.github.com/bakpakin/tiny-ecs/tar.gz/0f17f116ab2972534105281666856674a9978e8e"
+tiny-ecs@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/tiny-ecs/-/tiny-ecs-2.0.0.tgz#966b81f94a975dab08d460a691d625f74c29541c"
+  integrity sha1-lmuB+UqXXasI1GCmkdYl90wpVBw=
+  dependencies:
+    typedef "~1.0.2"
 
 to-fast-properties@^1.0.3:
   version "1.0.3"
@@ -1305,6 +1313,16 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha1-yy4SAwZ+DI3h9hQJS5/kVwTqYAM=
+
+typedef@~1.0.2:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/typedef/-/typedef-1.0.4.tgz#f83388816916064d946008d9aeb297caaabf383b"
+  integrity sha1-+DOIgWkWBk2UYAjZrrKXyqq/ODs=
+
+typescript-collections@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/typescript-collections/-/typescript-collections-1.3.3.tgz#62d50d93c018c094d425eabee649f00ec5cc0fea"
+  integrity sha512-7sI4e/bZijOzyURng88oOFZCISQPTHozfE2sUu5AviFYk5QV7fYGb6YiDl+vKjF/pICA354JImBImL9XJWUvdQ==
 
 typescript-to-lua@^0.31.0:
   version "0.31.0"

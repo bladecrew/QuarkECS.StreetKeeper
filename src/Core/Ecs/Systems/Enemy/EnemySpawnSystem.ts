@@ -1,4 +1,4 @@
-import {EcsEngine, Entity, IUpdateSystem, query, Query} from "../../../EcsDraft/Ecs";
+import {EcsEngine, Entity, IUpdateSystem, query, Query} from "@h3xb0y/quark-ecs";
 import {SpriteSheet} from "../../../View/SpriteSheet";
 import {Animation} from "../../../View/Animation";
 import {EnemyComponent, EnemyDirection} from "../../Components/EnemyComponent";

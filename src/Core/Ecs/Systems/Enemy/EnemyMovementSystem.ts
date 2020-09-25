@@ -1,9 +1,9 @@
-import {EcsEngine, IUpdateSystem, query, Query} from "../../../EcsDraft/Ecs";
 import {EnemyComponent} from "../../Components/EnemyComponent";
 import {PlayerComponent} from "../../Components/PlayerComponent";
 import {IPositionComponent, PositionComponent} from "../../Components/PositionComponent";
 import {DrawComponent, IDraw} from "../../Components/DrawComponent";
 import {GameRuntimeData} from "../../Data/GameRuntimeData";
+import {EcsEngine, IUpdateSystem, query} from "@h3xb0y/quark-ecs";
 
 export class EnemyMovementSystem implements IUpdateSystem
 {
