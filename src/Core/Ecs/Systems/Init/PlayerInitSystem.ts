@@ -68,10 +68,21 @@ export class PlayerInitSystem implements IInitSystem
       true
     );
     
+    let damageAnimation = new Animation(
+      [
+        sheet.frame(13, 5),
+        sheet.frame(13, 4),
+        sheet.frame(6, 6),
+      ],
+      10, 
+      true
+    );
+    
     let animator = new Animator()
       .addAnimation("idle", idleAnimation)
       .addAnimation("simpleAttack", attackAnimationSimple)
       .addAnimation("extendedAttack", attackAnimationExtended)
+      .addAnimation("damage", damageAnimation)
       .addAnimation("walk", walkAnimation);
     
     animator.play("idle");

@@ -10,6 +10,7 @@ import {EnemyMovementSystem} from "./Core/Ecs/Systems/Enemy/EnemyMovementSystem"
 import {PlayerAttackSystem} from "./Core/Ecs/Systems/Player/PlayerAttackSystem";
 import {EnemyAttackSystem} from "./Core/Ecs/Systems/Enemy/EnemyAttackSystem";
 import {EcsEngine} from "./Libs/quark-ecs/EcsEngine";
+import {PlayerDamageComponent} from "./Core/Ecs/Components/Events/Player/PlayerDamageComponent";
 
 const GAME_WIDTH = 512;
 const GAME_HEIGHT = 288;

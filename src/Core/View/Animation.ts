@@ -44,7 +44,7 @@ export class Animation
     return this._quads[this._currentFrame];
   }
   
-  public play(onFinished?: () => {})
+  public play(onFinished?: () => void)
   {
     this._onFinished = onFinished;
     this._isPlaying = true;

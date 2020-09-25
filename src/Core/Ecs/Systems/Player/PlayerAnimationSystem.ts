@@ -3,6 +3,7 @@ import {DrawComponent} from "../../Components/DrawComponent";
 import {EcsEngine} from "../../../../Libs/quark-ecs/EcsEngine";
 import {IUpdateSystem} from "../../../../Libs/quark-ecs/System";
 import {query} from "../../../../Libs/quark-ecs/Query";
+import {PlayerDamageComponent} from "../../Components/Events/Player/PlayerDamageComponent";
 
 export class PlayerAnimationSystem implements IUpdateSystem
 {
@@ -10,6 +11,19 @@ export class PlayerAnimationSystem implements IUpdateSystem
   {
     for (let [player, draw] of query(engine).get(PlayerComponent, DrawComponent))
     {
+      for (let [damageEvent, entity] of query(engine).get(PlayerDamageComponent))
+      {
+        let resetAttack = (): void => 
+        {
+          player.currentAttackType = AttackType.Idle;
+          draw.animator.play("idle");
+          entity.remove(PlayerDamageComponent);
+        }
+        
+        draw.animator.play('damage', resetAttack);
+        return;
+      } 
+      
       if (player.currentAttackType != AttackType.Idle)
       {
         let resetAttack = () => player.currentAttackType = AttackType.Idle;
@@ -24,6 +38,7 @@ export class PlayerAnimationSystem implements IUpdateSystem
         draw.animator.play("idle");
       }
     }
+    
   }
   
 }

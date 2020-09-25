@@ -13,32 +13,35 @@ export class PlayerMovementSystem implements IUpdateSystem
     let deltaTime = engine.getData(GameRuntimeData).deltaTime;
     for (let [playerComponent, positionComponent, drawComponent] of query(engine).get(PlayerComponent, PositionComponent, DrawComponent))
     {
-      if (love.keyboard.isDown("q"))
+      if(playerComponent.currentAttackType == AttackType.Idle)
       {
-        this.rotateLeft(positionComponent, playerComponent, drawComponent);
-        playerComponent.currentAttackType = AttackType.Simple;
-        playerComponent.attackDirection = "left";
-      }
-      
-      if (love.keyboard.isDown("e"))
-      {
-        this.rotateRight(positionComponent, playerComponent, drawComponent);
-        playerComponent.currentAttackType = AttackType.Simple;
-        playerComponent.attackDirection = "right";
-      }
-      
-      if (love.keyboard.isDown("d"))
-      {
-        this.rotateRight(positionComponent, playerComponent, drawComponent);
-        playerComponent.currentAttackType = AttackType.Extended;
-        playerComponent.attackDirection = "right";
-      }
-      
-      if (love.keyboard.isDown("a"))
-      {
-        this.rotateLeft(positionComponent, playerComponent, drawComponent);
-        playerComponent.currentAttackType = AttackType.Extended;
-        playerComponent.attackDirection = "left";
+        if (love.keyboard.isDown("q"))
+        {
+          this.rotateLeft(positionComponent, playerComponent, drawComponent);
+          playerComponent.currentAttackType = AttackType.Simple;
+          playerComponent.attackDirection = "left";
+        }
+  
+        if (love.keyboard.isDown("e"))
+        {
+          this.rotateRight(positionComponent, playerComponent, drawComponent);
+          playerComponent.currentAttackType = AttackType.Simple;
+          playerComponent.attackDirection = "right";
+        }
+  
+        if (love.keyboard.isDown("d"))
+        {
+          this.rotateRight(positionComponent, playerComponent, drawComponent);
+          playerComponent.currentAttackType = AttackType.Extended;
+          playerComponent.attackDirection = "right";
+        }
+  
+        if (love.keyboard.isDown("a"))
+        {
+          this.rotateLeft(positionComponent, playerComponent, drawComponent);
+          playerComponent.currentAttackType = AttackType.Extended;
+          playerComponent.attackDirection = "left";
+        }
       }
       
       if (love.keyboard.isDown("right"))

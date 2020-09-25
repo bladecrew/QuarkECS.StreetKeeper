@@ -26,7 +26,7 @@ export class Animator
   
   private _name: string = "";
   
-  public play(name: string, onFinished?: () => {}): void
+  public play(name: string, onFinished?: () => void): void
   {
     if(this._name == name)
       return;

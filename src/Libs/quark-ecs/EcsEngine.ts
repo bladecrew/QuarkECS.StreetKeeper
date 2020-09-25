@@ -1,6 +1,7 @@
 import {Entity} from "./Entity";
 import {IInitSystem, IUpdateSystem} from "./System";
 import {Component, Data, Service} from "./Types";
+import {GameConsole} from "../../Core/Tools/GameConsole";
 
 export class EcsEngine
 {
@@ -18,6 +19,7 @@ export class EcsEngine
   
   public update(): void
   {
+    GameConsole.setValue("Entities count", this._entities.length);
     this._updateSystems.forEach(x => x.update(this));
     this._eventComponents.forEach(x => this._entities.forEach(y => y.remove(x)));
   }
