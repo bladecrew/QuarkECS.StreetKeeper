@@ -1,4 +1,4 @@
-import {EcsEngine, Entity, IInitSystem, IUpdateSystem, Query} from "../../../EcsDraft/Ecs";
+import {EcsEngine, Entity, IUpdateSystem, query, Query} from "../../../EcsDraft/Ecs";
 import {SpriteSheet} from "../../../View/SpriteSheet";
 import {Animation} from "../../../View/Animation";
 import {EnemyComponent, EnemyDirection} from "../../Components/EnemyComponent";
@@ -12,17 +12,11 @@ export class EnemySpawnSystem implements IUpdateSystem
   
   update(engine: EcsEngine)
   {
-    let entities = new Query(engine).get(EnemyComponent);
-    if (entities.length > 0)
+    if (query(engine).get(EnemyComponent).length > 0)
       return;
     
     this.enemyEntities.entities().forEach(x => engine.addEntity(x));
   }
-}
-
-export enum EnemyType
-{
-  Kaban
 }
 
 export class EnemyEntities

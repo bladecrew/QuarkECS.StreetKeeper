@@ -1,4 +1,4 @@
-import {EcsEngine, Entity, IUpdateSystem, Query} from "../../../EcsDraft/Ecs";
+import {EcsEngine, Entity, IUpdateSystem, query, Query} from "../../../EcsDraft/Ecs";
 import {AttackType, IPlayerComponent, PlayerComponent} from "../../Components/PlayerComponent";
 import {PositionComponent} from "../../Components/PositionComponent";
 import {EnemyComponent} from "../../Components/EnemyComponent";
@@ -17,7 +17,7 @@ export class PlayerAttackSystem implements IUpdateSystem
     for (let [entity, enemy, position] of query.get(EnemyComponent, PositionComponent))
     {
       if (Math.abs(position.x - playerPosition.x) > enemy.damageDealingRange)
-        return;
+        continue;
       
       if (playerPosition.x < position.x && player.attackDirection == "right")
         kill(engine, entity, player);
