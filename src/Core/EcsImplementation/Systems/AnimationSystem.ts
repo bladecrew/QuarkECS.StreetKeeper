@@ -8,7 +8,7 @@ export class AnimationSystem implements IUpdateSystem
   {
     let delta = engine.getData(GameRuntimeData).deltaTime;
     
-    for (let [entity, drawComponent] of query(engine).get(DrawComponent))
+    for (let [drawComponent] of query(engine).get(DrawComponent))
       drawComponent.animator.update(delta);
   }
 }

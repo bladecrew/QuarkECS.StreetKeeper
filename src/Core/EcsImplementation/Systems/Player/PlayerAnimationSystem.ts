@@ -6,7 +6,7 @@ export class PlayerAnimationSystem implements IUpdateSystem
 {
   update(engine: EcsEngine): void
   {
-    for (let [_, playerComponent, drawComponent] of query(engine).get(PlayerComponent, DrawComponent))
+    for (let [playerComponent, drawComponent] of query(engine).get(PlayerComponent, DrawComponent))
     {
       if (playerComponent.currentAttackType != AttackType.Idle)
       {

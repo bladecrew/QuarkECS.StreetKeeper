@@ -11,11 +11,11 @@ export class EnemyAttackSystem implements IUpdateSystem
   update(engine: EcsEngine): void
   {
     let query = new Query(engine);
-    let [_, player, playerPosition] = query.get(PlayerComponent, PositionComponent)[0];
+    let [player, playerPosition] = query.get(PlayerComponent, PositionComponent)[0];
     let deltaTime = engine.getData(GameRuntimeData).deltaTime;
     
     query.get(EnemyComponent, PositionComponent).forEach(
-      ([entity, enemy, position]) =>
+      ([enemy, position, entity]) =>
       {
         if (Math.abs(position.x - playerPosition.x) > enemy.damageDealingRange)
           return;

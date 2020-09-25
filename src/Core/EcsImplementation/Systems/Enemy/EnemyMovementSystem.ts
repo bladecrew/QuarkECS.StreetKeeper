@@ -11,10 +11,10 @@ export class EnemyMovementSystem implements IUpdateSystem
   {
     let delta = engine.getData(GameRuntimeData).deltaTime;
     let query = new Query(engine);
-    let [_, player, playerPosition] = query.get(PlayerComponent, PositionComponent)[0];
+    let [player, playerPosition] = query.get(PlayerComponent, PositionComponent)[0];
     
     new Query(engine).get(EnemyComponent, PositionComponent, DrawComponent).forEach(
-      ([entity, enemy, position, draw]) =>
+      ([enemy, position, draw]) =>
       {
         if (playerPosition.x > position.x)
         {

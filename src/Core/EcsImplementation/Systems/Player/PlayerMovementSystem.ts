@@ -9,7 +9,7 @@ export class PlayerMovementSystem implements IUpdateSystem
   update(engine: EcsEngine): void
   {
     let deltaTime = engine.getData(GameRuntimeData).deltaTime;
-    for (let [entity, playerComponent, positionComponent, drawComponent] of query(engine).get(PlayerComponent, PositionComponent, DrawComponent))
+    for (let [playerComponent, positionComponent, drawComponent] of query(engine).get(PlayerComponent, PositionComponent, DrawComponent))
     {
       if (love.keyboard.isDown("q"))
       {

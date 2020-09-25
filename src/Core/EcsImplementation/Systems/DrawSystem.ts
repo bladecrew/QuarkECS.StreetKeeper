@@ -6,7 +6,7 @@ export class DrawSystem implements IUpdateSystem
 {
   update(engine: EcsEngine): void
   {
-    for (let [entity, drawComponent, positionComponent] of query(engine).get(DrawComponent, PositionComponent))
+    for (let [drawComponent, positionComponent] of query(engine).get(DrawComponent, PositionComponent))
     {
       love.graphics.draw(
         drawComponent.spriteSheet.texture,
