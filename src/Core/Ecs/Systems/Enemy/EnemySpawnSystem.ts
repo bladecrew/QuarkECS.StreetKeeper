@@ -8,6 +8,7 @@ import {DrawComponent} from "../../Components/DrawComponent";
 import {Animator} from "../../../View/Animator";
 import {IPositionComponent, PositionComponent} from "../../Components/PositionComponent";
 import {Entity} from "../../../../Libs/quark-ecs/Entity";
+import {MidpointComponent} from "../../Components/MidpointComponent";
 
 export class EnemySpawnSystem implements IUpdateSystem
 {
@@ -67,6 +68,8 @@ function godzilla(position: IPositionComponent): Entity
   let godzillaAnimator = new Animator()
     .addAnimation("walk", godzillaMovementAnimation);
   
+  godzillaAnimator.play("walk");
+  
   let entity = new Entity();
   entity.set(EnemyComponent, {
     direction: EnemyDirection.Left,
@@ -80,6 +83,9 @@ function godzilla(position: IPositionComponent): Entity
   
   entity.set(PositionComponent, position);
   
+  let [x, y, width, height] = godzillaAnimator.currentAnimation()!.currentFrame().getViewport();
+  entity.set(MidpointComponent, {x: position.x + width / 2, y: position.y});
+  
   entity.set(DrawComponent, {
     image: godzillaImage,
     spriteSheet: godzillaSheet,
@@ -88,8 +94,6 @@ function godzilla(position: IPositionComponent): Entity
     scaleX: -1,
     scaleY: 1
   });
-  
-  godzillaAnimator.play("walk");
   
   return entity;
 }

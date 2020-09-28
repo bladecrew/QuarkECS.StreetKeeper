@@ -5,79 +5,86 @@ import {DrawComponent, IDraw} from "../../Components/DrawComponent";
 import {query} from "../../../../Libs/quark-ecs/Query";
 import {EcsEngine} from "../../../../Libs/quark-ecs/EcsEngine";
 import {IUpdateSystem} from "../../../../Libs/quark-ecs/System";
+import {IMidpointComponent, MidpointComponent} from "../../Components/MidpointComponent";
 
 export class PlayerMovementSystem implements IUpdateSystem
 {
   update(engine: EcsEngine): void
   {
     let deltaTime = engine.getData(GameRuntimeData).deltaTime;
-    for (let [playerComponent, positionComponent, drawComponent] of query(engine).get(PlayerComponent, PositionComponent, DrawComponent))
+    for (let [player, position, draw, midpoint] of query(engine).get(PlayerComponent, PositionComponent, DrawComponent, MidpointComponent))
     {
-      if(playerComponent.currentAttackType == AttackType.Idle)
+      if(player.currentAttackType == AttackType.Idle)
       {
         if (love.keyboard.isDown("q"))
         {
-          this.rotateLeft(positionComponent, playerComponent, drawComponent);
-          playerComponent.currentAttackType = AttackType.Simple;
-          playerComponent.attackDirection = "left";
+          this.rotateLeft(position, player, draw, midpoint);
+          player.currentAttackType = AttackType.Simple;
+          player.attackDirection = "left";
         }
   
         if (love.keyboard.isDown("e"))
         {
-          this.rotateRight(positionComponent, playerComponent, drawComponent);
-          playerComponent.currentAttackType = AttackType.Simple;
-          playerComponent.attackDirection = "right";
+          this.rotateRight(position, player, draw, midpoint);
+          player.currentAttackType = AttackType.Simple;
+          player.attackDirection = "right";
         }
   
         if (love.keyboard.isDown("d"))
         {
-          this.rotateRight(positionComponent, playerComponent, drawComponent);
-          playerComponent.currentAttackType = AttackType.Extended;
-          playerComponent.attackDirection = "right";
+          this.rotateRight(position, player, draw, midpoint);
+          player.currentAttackType = AttackType.Extended;
+          player.attackDirection = "right";
         }
   
         if (love.keyboard.isDown("a"))
         {
-          this.rotateLeft(positionComponent, playerComponent, drawComponent);
-          playerComponent.currentAttackType = AttackType.Extended;
-          playerComponent.attackDirection = "left";
+          this.rotateLeft(position, player, draw, midpoint);
+          player.currentAttackType = AttackType.Extended;
+          player.attackDirection = "left";
         }
       }
       
       if (love.keyboard.isDown("right"))
       {
-        positionComponent.x += 100 * deltaTime;
-        playerComponent.isWalking = true;
-        this.rotateRight(positionComponent, playerComponent, drawComponent);
+        position.x += 100 * deltaTime;
+        midpoint.x += 100 * deltaTime;
+        player.isWalking = true;
+        this.rotateRight(position, player, draw, midpoint);
       }
       else if (love.keyboard.isDown("left"))
       {
-        positionComponent.x -= 100 * deltaTime;
-        playerComponent.isWalking = true;
-        this.rotateLeft(positionComponent, playerComponent, drawComponent);
+        position.x -= 100 * deltaTime;
+        midpoint.x -= 100 * deltaTime;
+        player.isWalking = true;
+        this.rotateLeft(position, player, draw, midpoint);
       }
       else
       {
-        playerComponent.isWalking = false;
+        player.isWalking = false;
       }
     }
   }
   
-  private rotateRight(position: IPositionComponent, player: IPlayerComponent, draw: IDraw): void
+  private rotateRight(position: IPositionComponent, player: IPlayerComponent, draw: IDraw, midpoint: IMidpointComponent): void
   {
     if (draw.scaleX == -1 && player.currentAttackType == AttackType.Idle)
     {
       draw.scaleX = 1;
       position.x -= 70;
+      let [x, y, width, height] = draw.animator.currentAnimation()!.currentFrame().getViewport();
+      midpoint.x = position.x + width / 2;
     }
   };
   
-  private rotateLeft(position: IPositionComponent, player: IPlayerComponent, draw: IDraw): void
+  private rotateLeft(position: IPositionComponent, player: IPlayerComponent, draw: IDraw, midpoint: IMidpointComponent): void
   {
     if (draw.scaleX == 1 && player.currentAttackType == AttackType.Idle)
     {
       draw.scaleX = -1;
       position.x += 70;
+      let [x, y, width, height] = draw.animator.currentAnimation()!.currentFrame().getViewport();
+      midpoint.x = position.x - width / 2;
     }
   };
 }

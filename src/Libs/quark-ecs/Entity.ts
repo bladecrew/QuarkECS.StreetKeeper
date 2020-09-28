@@ -4,12 +4,12 @@ export class Entity
 {
   private readonly _components: Record<string, any> = {};
   
-  public has(component: Component<any>): boolean
+  has(component: Component<any>): boolean
   {
     return this._components.hasOwnProperty(component);
   }
   
-  public set<T>(component: Component<T>, value: T): void
+  set<T>(component: Component<T>, value: T): void
   {
     this._components[component] = value;
   }
@@ -19,7 +19,12 @@ export class Entity
     delete this._components[component];
   }
   
-  public get<T>(component: Component<T>): T
+  hasAnyComponent(): boolean
+  {
+    return Object.keys(this._components).length > 0;
+  }
+  
+  get<T>(component: Component<T>): T
   {
     const value = this._components[component];
     if (!value)

@@ -7,6 +7,7 @@ import {PositionComponent} from "../../Components/PositionComponent";
 import {PlayerComponent} from "../../Components/PlayerComponent";
 import {IInitSystem} from "../../../../Libs/quark-ecs/System";
 import {Entity} from "../../../../Libs/quark-ecs/Entity";
+import {MidpointComponent} from "../../Components/MidpointComponent";
 
 export class PlayerInitSystem implements IInitSystem
 {
@@ -74,7 +75,7 @@ export class PlayerInitSystem implements IInitSystem
         sheet.frame(13, 4),
         sheet.frame(6, 6),
       ],
-      10, 
+      10,
       true
     );
     
@@ -95,7 +96,11 @@ export class PlayerInitSystem implements IInitSystem
       scaleX: 1,
       scaleY: 1
     });
+    
     entity.set(PositionComponent, {x: 114, y: 190});
+  
+    let [x, y, width, height] = animator.currentAnimation()!.currentFrame().getViewport();
+    entity.set(MidpointComponent, {x: 114 + width / 2, y: 190});
     entity.set(PlayerComponent, {
       isWalking: false,
       currentAttackType: "idle",
