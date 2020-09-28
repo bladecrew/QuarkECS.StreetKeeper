@@ -9,6 +9,7 @@ import {EcsEngine} from "../../../../Libs/quark-ecs/EcsEngine";
 import {query} from "../../../../Libs/quark-ecs/Query";
 import {Entity} from "../../../../Libs/quark-ecs/Entity";
 import {PlayerDamageComponent} from "../../Components/Events/Player/PlayerDamageComponent";
+import {MidpointComponent} from "../../Components/MidpointComponent";
 
 export class EnemyAttackSystem implements IUpdateSystem
 {
@@ -16,11 +17,11 @@ export class EnemyAttackSystem implements IUpdateSystem
   {
     let $query = query(engine);
     let deltaTime = engine.getData(GameRuntimeData).deltaTime;
-    let [player, playerPosition] = $query.get(PlayerComponent, PositionComponent)[0];
+    let [player, playerMidpoint] = $query.get(PlayerComponent, MidpointComponent)[0];
     
-    for (let [enemy, position, entity] of $query.get(EnemyComponent, PositionComponent))
+    for (let [enemy, midpoint, entity] of $query.get(EnemyComponent, MidpointComponent))
     {
-      if (Math.abs(position.x - playerPosition.x) > enemy.damageDealingRange)
+      if (Math.abs(midpoint.x - playerMidpoint.x) > enemy.damageDealingRange)
         continue;
       
       if (!entity.has(EnemyAttackTimeComponent))

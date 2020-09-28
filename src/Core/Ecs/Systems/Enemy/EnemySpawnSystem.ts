@@ -76,8 +76,8 @@ function godzilla(position: IPositionComponent): Entity
     damage: 10,
     health: 100,
     speed: 20,
-    damageDealingRange: 150,
-    attackRange: 100,
+    damageDealingRange: 100,
+    attackRange: 50,
     attackPeriod: 1
   });
   
@@ -91,7 +91,7 @@ function godzilla(position: IPositionComponent): Entity
     spriteSheet: godzillaSheet,
     animator: godzillaAnimator,
     rotation: 0,
-    scaleX: -1,
+    scaleX: 1,
     scaleY: 1
   });
   

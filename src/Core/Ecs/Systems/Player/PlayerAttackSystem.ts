@@ -6,26 +6,27 @@ import {IUpdateSystem} from "../../../../Libs/quark-ecs/System";
 import {EcsEngine} from "../../../../Libs/quark-ecs/EcsEngine";
 import {Query} from "../../../../Libs/quark-ecs/Query";
 import {Entity} from "../../../../Libs/quark-ecs/Entity";
+import {MidpointComponent} from "../../Components/MidpointComponent";
 
 export class PlayerAttackSystem implements IUpdateSystem
 {
   update(engine: EcsEngine): void
   {
     let query = new Query(engine);
-    let [player, playerPosition] = query.get(PlayerComponent, PositionComponent)[0];
+    let [player, playerMidpoint] = query.get(PlayerComponent, MidpointComponent)[0];
     
     if (player.currentAttackType == AttackType.Idle)
       return;
     
-    for (let [enemy, position, entity] of query.get(EnemyComponent, PositionComponent))
+    for (let [enemy, midpoint, entity] of query.get(EnemyComponent, MidpointComponent))
     {
-      if (Math.abs(position.x - playerPosition.x) > enemy.damageDealingRange)
+      if (Math.abs(midpoint.x - playerMidpoint.x) > enemy.damageDealingRange)
         continue;
       
-      if (playerPosition.x < position.x && player.attackDirection == "right")
+      if (playerMidpoint.x < midpoint.x && player.attackDirection == "right")
         this.kill(engine, entity, player);
       
-      if (playerPosition.x > position.x && player.attackDirection == "left")
+      if (playerMidpoint.x > midpoint.x && player.attackDirection == "left")
         this.kill(engine, entity, player);
     }
   }
