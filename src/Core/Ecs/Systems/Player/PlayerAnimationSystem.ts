@@ -11,6 +11,12 @@ export class PlayerAnimationSystem implements IUpdateSystem
   {
     for (let [player, draw] of query(engine).get(PlayerComponent, DrawComponent))
     {
+      if(player.health <= 0)
+      {
+        draw.animator.play('die');  
+        return;
+      }
+      
       for (let [damageEvent, entity] of query(engine).get(PlayerDamageComponent))
       {
         let resetAttack = (): void => 

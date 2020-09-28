@@ -21,14 +21,11 @@ export class EnemyAttackSystem implements IUpdateSystem
     
     for (let [enemy, midpoint, entity] of $query.get(EnemyComponent, MidpointComponent))
     {
-      if (Math.abs(midpoint.x - playerMidpoint.x) > enemy.damageDealingRange)
+      if (Math.abs(midpoint.x - playerMidpoint.x) > enemy.attackRange)
         continue;
       
       if (!entity.has(EnemyAttackTimeComponent))
-      {
-        entity.set(EnemyAttackTimeComponent, {lastAttackTime: 0});
-        continue;
-      }
+        entity.set(EnemyAttackTimeComponent, {lastAttackTime: enemy.attackPeriod});
       
       let enemyAttackTime = entity.get(EnemyAttackTimeComponent);
       

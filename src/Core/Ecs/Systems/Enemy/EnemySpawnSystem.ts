@@ -31,12 +31,22 @@ export class EnemyEntities
   {
     if (this._currentWave++ == 1)
     {
-      let k1 = godzilla({x: -30, y: 180});
-      let k2 = godzilla({x: -60, y: 180});
-      let k3 = godzilla({x: 600, y: 180});
-      let k4 = godzilla({x: 660, y: 180});
-      let k5 = godzilla({x: 720, y: 180});
+      let k1 = godzilla(this._currentWave, {x: -30, y: 180});
+      let k2 = godzilla(this._currentWave, {x: -60, y: 180});
+      let k3 = godzilla(this._currentWave, {x: 600, y: 180});
+      let k4 = godzilla(this._currentWave, {x: 660, y: 180});
+      let k5 = godzilla(this._currentWave, {x: 720, y: 180});
       
+      return [k1, k2, k3, k4, k5];
+    }
+    else
+    {
+      let k1 = godzilla(this._currentWave, {x: -30, y: 180});
+      let k2 = godzilla(this._currentWave, {x: -60, y: 180});
+      let k3 = godzilla(this._currentWave, {x: 600, y: 180});
+      let k4 = godzilla(this._currentWave, {x: 660, y: 180});
+      let k5 = godzilla(this._currentWave, {x: 720, y: 180});
+  
       return [k1, k2, k3, k4, k5];
     }
     
@@ -46,9 +56,9 @@ export class EnemyEntities
 
 //region @Enemies
 
-function godzilla(position: IPositionComponent): Entity
+function godzilla(wave: number, position: IPositionComponent): Entity
 {
-  let godzillaImage = love.graphics.newImage("res/images/monster.png");
+  let godzillaImage = love.graphics.newImage("res/images/godzilla.png");
   let godzillaSheet = new SpriteSheet(godzillaImage, 3, 5);
   let godzillaMovementAnimation = new Animation(
     [
@@ -75,9 +85,9 @@ function godzilla(position: IPositionComponent): Entity
     direction: EnemyDirection.Left,
     damage: 10,
     health: 100,
-    speed: 20,
-    damageDealingRange: 100,
-    attackRange: 50,
+    speed: 20 * wave / 2,
+    damageDealingRange: 70,
+    attackRange: 35,
     attackPeriod: 1
   });
   

@@ -30,18 +30,22 @@ export class EcsEngine
     })
   }
   
-  public addSystem(system: IUpdateSystem | IInitSystem): void
+  public addSystem(system: IUpdateSystem | IInitSystem): EcsEngine
   {
     if ("update" in system)
       this._updateSystems.push(system);
     
     if("init" in system)
       this._initSystems.push(system);
+    
+    return this;
   }
   
-  public registerEventComponent(eventComponent: Component<any>): void
+  public registerEventComponent(eventComponent: Component<any>): EcsEngine
   {
     this._eventComponents.push(eventComponent);
+    
+    return this;
   }
   
   public addEntity(entity: Entity): void

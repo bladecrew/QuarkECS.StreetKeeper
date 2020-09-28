@@ -14,11 +14,11 @@ export class EnemyMovementSystem implements IUpdateSystem
   {
     let delta = engine.getData(GameRuntimeData).deltaTime;
     let $query = query(engine);
-    let [_, playerPosition] = $query.get(PlayerComponent, PositionComponent)[0];
+    let [_, playerMidpoint] = $query.get(PlayerComponent, MidpointComponent)[0];
     
     for (let [enemy, position, draw, midpoint] of $query.get(EnemyComponent, PositionComponent, DrawComponent, MidpointComponent))
     {
-      if (playerPosition.x > position.x)
+      if (playerMidpoint.x > position.x)
       {
         this.lookRight(draw, position, midpoint);
         position.x += enemy.speed * delta;

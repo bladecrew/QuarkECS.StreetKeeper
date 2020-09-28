@@ -14,6 +14,9 @@ export class PlayerMovementSystem implements IUpdateSystem
     let deltaTime = engine.getData(GameRuntimeData).deltaTime;
     for (let [player, position, draw, midpoint] of query(engine).get(PlayerComponent, PositionComponent, DrawComponent, MidpointComponent))
     {
+      if(player.health <= 0)
+        return;
+      
       if(player.currentAttackType == AttackType.Idle)
       {
         if (love.keyboard.isDown("q"))
@@ -62,6 +65,13 @@ export class PlayerMovementSystem implements IUpdateSystem
       else
       {
         player.isWalking = false;
+      }
+      
+      if(position.x < 20)
+      {
+        position.x = 20;
+        let [x, y, width, height] = draw.animator.currentAnimation()!.currentFrame().getViewport();
+        midpoint.x = position.x - width / 2;
       }
     }
   }

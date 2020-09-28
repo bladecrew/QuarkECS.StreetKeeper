@@ -10,7 +10,6 @@ import {EnemyMovementSystem} from "./Core/Ecs/Systems/Enemy/EnemyMovementSystem"
 import {PlayerAttackSystem} from "./Core/Ecs/Systems/Player/PlayerAttackSystem";
 import {EnemyAttackSystem} from "./Core/Ecs/Systems/Enemy/EnemyAttackSystem";
 import {EcsEngine} from "./Libs/quark-ecs/EcsEngine";
-import {PlayerDamageComponent} from "./Core/Ecs/Components/Events/Player/PlayerDamageComponent";
 
 const GAME_WIDTH = 512;
 const GAME_HEIGHT = 288;
@@ -23,16 +22,20 @@ let scale = {
 const backgroundImage = love.graphics.newImage("res/images/background1.png");
 
 let engine = new EcsEngine();
-engine.addSystem(new PlayerInitSystem());
-engine.addSystem(new EnemySpawnSystem());
-engine.addSystem(new EnemyMovementSystem());
-engine.addSystem(new EnemyAttackSystem());
-engine.addSystem(new PlayerAttackSystem());
-engine.addSystem(new DrawSystem());
-engine.addSystem(new AnimationSystem());
-engine.addSystem(new PlayerMovementSystem());
-engine.addSystem(new PlayerAnimationSystem());
-engine.initialize();
+engine
+  /**-------Enemies-----------**/
+  .addSystem(new EnemySpawnSystem())
+  .addSystem(new EnemyMovementSystem())
+  .addSystem(new EnemyAttackSystem())
+  /**-------Player-----------**/
+  .addSystem(new PlayerInitSystem()) // init
+  .addSystem(new PlayerMovementSystem())
+  .addSystem(new PlayerAnimationSystem())
+  .addSystem(new PlayerAttackSystem())
+  /**-------Global-----------**/
+  .addSystem(new DrawSystem())
+  .addSystem(new AnimationSystem())
+  .initialize();
 
 love.load = () =>
 {
@@ -61,7 +64,7 @@ love.update = dt =>
   if (love.keyboard.isDown("escape"))
     love.event.quit();
   
-  engine.setData(GameRuntimeData, {deltaTime : dt});
+  engine.setData(GameRuntimeData, {deltaTime: dt});
 };
 
 love.draw = () =>

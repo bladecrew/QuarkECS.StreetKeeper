@@ -23,10 +23,10 @@ export class PlayerAttackSystem implements IUpdateSystem
       if (Math.abs(midpoint.x - playerMidpoint.x) > enemy.damageDealingRange)
         continue;
       
-      if (playerMidpoint.x < midpoint.x && player.attackDirection == "right")
+      if (playerMidpoint.x <= midpoint.x && player.attackDirection == "right")
         this.kill(engine, entity, player);
       
-      if (playerMidpoint.x > midpoint.x && player.attackDirection == "left")
+      if (playerMidpoint.x >= midpoint.x && player.attackDirection == "left")
         this.kill(engine, entity, player);
     }
   }
