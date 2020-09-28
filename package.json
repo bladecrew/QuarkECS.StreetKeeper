@@ -1,5 +1,5 @@
 {
-  "name": "typescript-game",
+  "name": "street-keeper",
   "license": "MIT",
   "prettierGlob": "**/*.{js,ts,ym,md}",
   "scripts": {

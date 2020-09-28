@@ -5,5 +5,5 @@ package.path += ";src/Libs/quark-ecs/?.lua";
 
 love.conf = t =>
 {
-  t.window.title = "Street Keeper.";
+  t.window.title = "Street Keeper!";
 };
