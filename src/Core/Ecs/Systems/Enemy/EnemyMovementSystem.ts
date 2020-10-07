@@ -14,7 +14,10 @@ export class EnemyMovementSystem implements IUpdateSystem
   {
     let delta = engine.getData(GameRuntimeData).deltaTime;
     let $query = query(engine);
-    let [_, playerMidpoint] = $query.get(PlayerComponent, MidpointComponent)[0];
+    let [player, playerMidpoint] = $query.get(PlayerComponent, MidpointComponent)[0];
+    
+    if(player.health <= 0)
+      return;
     
     for (let [enemy, position, draw, midpoint] of $query.get(EnemyComponent, PositionComponent, DrawComponent, MidpointComponent))
     {

@@ -23,16 +23,18 @@ const backgroundImage = love.graphics.newImage("res/images/background1.png");
 
 let engine = new EcsEngine();
 engine
-  /**-------Enemies-----------**/
+  //enemies
   .addSystem(new EnemySpawnSystem())
   .addSystem(new EnemyMovementSystem())
   .addSystem(new EnemyAttackSystem())
-  /**-------Player-----------**/
+  
+  //player
   .addSystem(new PlayerInitSystem()) // init
   .addSystem(new PlayerMovementSystem())
   .addSystem(new PlayerAnimationSystem())
   .addSystem(new PlayerAttackSystem())
-  /**-------Global-----------**/
+  
+  //global
   .addSystem(new DrawSystem())
   .addSystem(new AnimationSystem())
   .initialize();

@@ -1,5 +1,4 @@
 import {PlayerComponent} from "../../Components/PlayerComponent";
-import {PositionComponent} from "../../Components/PositionComponent";
 import {EnemyComponent} from "../../Components/EnemyComponent";
 import {EnemyAttackTimeComponent} from "../../Components/EnemyAttackTimeComponent";
 import {GameRuntimeData} from "../../Data/GameRuntimeData";
@@ -8,7 +7,7 @@ import {IUpdateSystem} from "../../../../Libs/quark-ecs/System";
 import {EcsEngine} from "../../../../Libs/quark-ecs/EcsEngine";
 import {query} from "../../../../Libs/quark-ecs/Query";
 import {Entity} from "../../../../Libs/quark-ecs/Entity";
-import {PlayerDamageComponent} from "../../Components/Events/Player/PlayerDamageComponent";
+import {PlayerDamageComponent} from "../../Components/Events/Custom/PlayerDamageComponent";
 import {MidpointComponent} from "../../Components/MidpointComponent";
 
 export class EnemyAttackSystem implements IUpdateSystem

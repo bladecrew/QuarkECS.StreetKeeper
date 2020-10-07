@@ -7,6 +7,8 @@ import {EcsEngine} from "../../../../Libs/quark-ecs/EcsEngine";
 import {Query} from "../../../../Libs/quark-ecs/Query";
 import {Entity} from "../../../../Libs/quark-ecs/Entity";
 import {MidpointComponent} from "../../Components/MidpointComponent";
+import {callEvent} from "../../../Utils/F";
+import {DamagedEvent} from "../../Components/Events/Events";
 
 export class PlayerAttackSystem implements IUpdateSystem
 {
@@ -35,6 +37,7 @@ export class PlayerAttackSystem implements IUpdateSystem
   {
     engine.removeEntity(entity);
     player.score++;
-    GameConsole.setValue("Player score", player.score);
+    GameConsole.setValue("Custom score", player.score);
+    callEvent(engine, DamagedEvent);
   };
 }

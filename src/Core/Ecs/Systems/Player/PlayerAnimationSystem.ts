@@ -3,7 +3,7 @@ import {DrawComponent} from "../../Components/DrawComponent";
 import {EcsEngine} from "../../../../Libs/quark-ecs/EcsEngine";
 import {IUpdateSystem} from "../../../../Libs/quark-ecs/System";
 import {query} from "../../../../Libs/quark-ecs/Query";
-import {PlayerDamageComponent} from "../../Components/Events/Player/PlayerDamageComponent";
+import {PlayerDamageComponent} from "../../Components/Events/Custom/PlayerDamageComponent";
 
 export class PlayerAnimationSystem implements IUpdateSystem
 {

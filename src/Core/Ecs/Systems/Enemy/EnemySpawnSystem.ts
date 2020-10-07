@@ -33,9 +33,9 @@ export class EnemyEntities
     {
       let k1 = godzilla(this._currentWave, {x: -30, y: 180});
       let k2 = godzilla(this._currentWave, {x: -60, y: 180});
-      let k3 = godzilla(this._currentWave, {x: 600, y: 180});
-      let k4 = godzilla(this._currentWave, {x: 660, y: 180});
-      let k5 = godzilla(this._currentWave, {x: 720, y: 180});
+      let k3 = godzilla(this._currentWave, {x: 500, y: 180});
+      let k4 = godzilla(this._currentWave, {x: 560, y: 180});
+      let k5 = godzilla(this._currentWave, {x: 620, y: 180});
       
       return [k1, k2, k3, k4, k5];
     }
@@ -43,9 +43,9 @@ export class EnemyEntities
     {
       let k1 = godzilla(this._currentWave, {x: -30, y: 180});
       let k2 = godzilla(this._currentWave, {x: -60, y: 180});
-      let k3 = godzilla(this._currentWave, {x: 600, y: 180});
-      let k4 = godzilla(this._currentWave, {x: 660, y: 180});
-      let k5 = godzilla(this._currentWave, {x: 720, y: 180});
+      let k3 = godzilla(this._currentWave, {x: 500, y: 180});
+      let k4 = godzilla(this._currentWave, {x: 560, y: 180});
+      let k5 = godzilla(this._currentWave, {x: 620, y: 180});
   
       return [k1, k2, k3, k4, k5];
     }
@@ -85,7 +85,7 @@ function godzilla(wave: number, position: IPositionComponent): Entity
     direction: EnemyDirection.Left,
     damage: 10,
     health: 100,
-    speed: 20 * wave / 2,
+    speed: 40 * wave / 2,
     damageDealingRange: 70,
     attackRange: 35,
     attackPeriod: 1
